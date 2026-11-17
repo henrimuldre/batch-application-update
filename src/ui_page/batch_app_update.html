@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <style>
+        .bau-wrap {
+            padding: 20px 24px;
+            color: #1f2937;
+            font-size: 14px;
+        }
+
+        .bau-title {
+            margin: 0 0 4px 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .bau-subtitle {
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+
+        .bau-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .bau-card-body {
+            padding: 12px 16px;
+        }
+
+        .bau-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #eef0f3;
+            flex-wrap: wrap;
+        }
+
+        .bau-spacer {
+            flex: 1;
+        }
+
+        .bau-btn {
+            border: 1px solid #d0d5dd;
+            background: #fff;
+            color: #1f2937;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .bau-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .bau-btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+            background: #fff;
+        }
+
+        .bau-btn-primary {
+            background: #0b5cab;
+            border-color: #0b5cab;
+            color: #fff;
+        }
+
+        .bau-btn-primary:hover,
+        .bau-btn-primary:focus,
+        .bau-btn-primary:active {
+            background: #094a8a;
+            color: #fff;
+        }
+
+        .bau-btn-primary:disabled {
+            background: #0b5cab;
+        }
+
+        .bau-chip {
+            background: #eef2f7;
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .bau-chip-full {
+            background: #fdecc8;
+            color: #8a5a00;
+        }
+
+        .bau-status {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .bau-status-warn {
+            color: #b45309;
+        }
+
+        .bau-status-error {
+            color: #b91c1c;
+        }
+
+        .bau-status-ok {
+            color: #15803d;
+        }
+
+        .bau-banner {
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .bau-banner-info {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .bau-banner-warn {
+            background: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .bau-table-wrap {
+            max-height: calc(100vh - 290px);
+            overflow: auto;
+        }
+
+        .bau-items-wrap {
+            max-height: 420px;
+        }
+
+        .bau-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bau-table th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #f9fafb;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .bau-table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #f1f3f5;
+            vertical-align: middle;
+        }
+
+        .bau-table tbody tr {
+            cursor: pointer;
+        }
+
+        .bau-table tbody tr:hover {
+            background: #f6f9fc;
+        }
+
+        .bau-table tbody tr.bau-row-selected {
+            background: #eaf2fd;
+        }
+
+        .bau-table.bau-locked tbody tr {
+            cursor: default;
+            opacity: 0.6;
+        }
+
+        .bau-items-table tbody tr {
+            cursor: default;
+        }
+
+        .bau-items-table tbody tr.bau-row-current {
+            background: #fffbeb;
+        }
+
+        .bau-col-check {
+            width: 36px;
+        }
+
+        .bau-col-name {
+            font-weight: 500;
+        }
+
+        .bau-mono {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", monospace;
+            font-size: 16px;
+        }
+
+        .bau-upgrade {
+            color: #b45309;
+            margin-left: 8px;
+        }
+
+        .bau-muted {
+            color: #6b7280;
+        }
+
+        .bau-arrow {
+            color: #9ca3af;
+        }
+
+        .bau-target {
+            color: #15803d;
+            font-weight: 600;
+        }
+
+        .bau-badge {
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .bau-empty {
+            text-align: center;
+            color: #6b7280;
+            padding: 24px;
+        }
+
+        .bau-pager {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-top: 1px solid #eef0f3;
+            background: #fafbfc;
+        }
+
+        .bau-pages {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .bau-page-btn {
+            min-width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #374151;
+            font-size: 13px;
+        }
+
+        .bau-page-btn:hover {
+            background: #eceff3;
+        }
+
+        .bau-page-btn:disabled {
+            color: #c4c8cf;
+            cursor: default;
+            background: transparent;
+        }
+
+        .bau-page-active {
+            background: #e2e6eb;
+            font-weight: 600;
+        }
+
+        .bau-select {
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 13px;
+            background: #fff;
+        }
+
+        .bau-pre {
+            margin: 0;
+            padding: 12px 16px;
+            max-height: 360px;
+            overflow: auto;
+            background: #f9fafb;
+            border: none;
+            border-radius: 0;
+            font-size: 12px;
+        }
+
+        .bau-pill {
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #eef2f7;
+            color: #374151;
+        }
+
+        .bau-pill-running {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .bau-pill-ok {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .bau-pill-fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .bau-pill-warn {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .bau-progress {
+            height: 8px;
+            background: #eef0f3;
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 4px 0 10px 0;
+        }
+
+        .bau-progress-bar {
+            height: 100%;
+            width: 0;
+            background: #0b5cab;
+        }
+
+        .bau-progress-ok {
+            background: #15803d;
+        }
+
+        .bau-progress-fail {
+            background: #b91c1c;
+        }
+
+        .bau-progress-warn {
+            background: #d97706;
+        }
+
+        .bau-detail {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", monospace;
+            font-size: 12px;
+            color: #6b7280;
+            word-break: break-all;
+            margin-top: 4px;
+        }
+
+        .bau-kv {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 4px 12px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .bau-kv a {
+            color: #0b5cab;
+        }
+
+        .bau-strong {
+            font-weight: 600;
+        }
+
+        .bau-modal-backdrop {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(17, 24, 39, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .bau-modal {
+            background: #fff;
+            border-radius: 12px;
+            width: 680px;
+            max-width: calc(100vw - 32px);
+            max-height: calc(100vh - 64px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .bau-modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eef0f3;
+        }
+
+        .bau-modal-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .bau-modal-body {
+            padding: 16px 20px;
+            overflow: auto;
+        }
+
+        .bau-modal-summary {
+            margin: 0 0 12px 0;
+        }
+
+        .bau-modal-list {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .bau-modal-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 7px 12px;
+            border-bottom: 1px solid #f1f3f5;
+            font-size: 13px;
+        }
+
+        .bau-modal-item-name {
+            flex: 1;
+        }
+
+        .bau-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+            cursor: pointer;
+            margin-right: 4px;
+        }
+
+        .bau-modal-demo {
+            margin: 12px 0 0 0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .bau-modal-note {
+            color: #b45309;
+            margin: 12px 0 0 0;
+            font-size: 13px;
+        }
+
+        .bau-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding: 12px 20px;
+            border-top: 1px solid #eef0f3;
+        }
+
+        .bau-help-link {
+            margin: -8px 0 16px 4px;
+            font-size: 13px;
+        }
+
+        .bau-help-link a {
+            color: #0b5cab;
+        }
+
+        .bau-help h4 {
+            margin: 14px 0 6px 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .bau-help h4:first-child {
+            margin-top: 0;
+        }
+
+        .bau-help p,
+        .bau-help li {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bau-help ol,
+        .bau-help ul {
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+
+        .bau-help a {
+            color: #0b5cab;
+        }
+    </style>
+    <div class="bau-wrap">
+        <h2 class="bau-title" data-bau-msg="Batch application update">Batch application update</h2>
+        <div class="bau-subtitle"><span data-bau-msg="Store applications with an update compatible with build:">Store applications with an update compatible with build:</span>&#160;<span id="bauBuild" class="bau-mono">...</span><span id="bauUpgrade" class="bau-upgrade"></span></div>
+        <div id="bauUpgradeBanner" class="bau-banner bau-banner-warn" style="display:none"></div>
+        <div id="bauBanner" class="bau-banner" style="display:none"></div>
+        <div class="bau-card" id="bauRunCard" style="display:none">
+            <div class="bau-toolbar">
+                <strong data-bau-msg="Batch install">Batch install</strong>
+                <span id="bauRunState" class="bau-pill"></span>
+                <span id="bauRunPercent" class="bau-muted"></span>
+                <span class="bau-spacer"></span>
+                <span id="bauRunChecked" class="bau-muted"></span>
+                <button type="button" class="bau-btn" id="bauBtnWatch" onclick="bauToggleWatch()" style="display:none"></button>
+            </div>
+            <div class="bau-card-body">
+                <div class="bau-progress">
+                    <div id="bauRunBar" class="bau-progress-bar"></div>
+                </div>
+                <div id="bauRunMessage"></div>
+                <div id="bauRunDetail" class="bau-detail"></div>
+                <div id="bauRunNote" class="bau-status bau-status-warn"></div>
+                <div class="bau-kv">
+                    <span class="bau-muted" data-bau-msg="Batch name">Batch name</span><span id="bauRunName"></span>
+                    <span class="bau-muted" data-bau-msg="Current app">Current app</span><span id="bauRunCurrent"></span>
+                    <span class="bau-muted" data-bau-msg="Started by">Started by</span><span id="bauRunStartedBy"></span>
+                    <span class="bau-muted" data-bau-msg="Started">Started</span><span id="bauRunStarted"></span>
+                    <span class="bau-muted" data-bau-msg="Last update">Last update</span><span id="bauRunUpdated"></span>
+                    <span class="bau-muted" data-bau-msg="Node">Node</span><span id="bauRunNode" class="bau-mono"></span>
+                    <span class="bau-muted" data-bau-msg="Plan state">Plan state</span><span id="bauRunPlanState"></span>
+                    <span class="bau-muted" data-bau-msg="Execution tracker">Execution tracker</span><span id="bauRunTracker"></span>
+                    <span class="bau-muted" data-bau-msg="Install plan">Install plan</span><span id="bauRunPlan"></span>
+                    <span class="bau-muted" data-bau-msg="Rollback">Rollback</span><span id="bauRunRollback"></span>
+                </div>
+            </div>
+        </div>
+        <div class="bau-card" id="bauItemsCard" style="display:none">
+            <div class="bau-toolbar">
+                <strong data-bau-msg="Batch items">Batch items</strong>
+                <span id="bauItemsSummary" class="bau-muted"></span>
+            </div>
+            <div class="bau-table-wrap bau-items-wrap">
+                <table class="bau-table bau-items-table">
+                    <thead>
+                        <tr>
+                            <th data-bau-msg="Application">Application</th>
+                            <th data-bau-msg="Version">Version</th>
+                            <th data-bau-msg="State">State</th>
+                            <th data-bau-msg="Message">Message</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bauItemsBody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bau-card">
+            <div class="bau-toolbar">
+                <button type="button" class="bau-btn" id="bauBtnRefresh" onclick="bauLoad()" data-bau-msg="Refresh">Refresh</button>
+                <button type="button" class="bau-btn" id="bauBtnClear" onclick="bauClearSelection()" disabled="disabled" data-bau-msg="Clear selection">Clear selection</button>
+                <span id="bauCount" class="bau-chip"></span>
+                <span id="bauStatus" class="bau-status"></span>
+                <span class="bau-spacer"></span>
+                <label class="bau-check" for="bauDemoData"><input type="checkbox" id="bauDemoData" onclick="bauSetDemoData(this.checked)" /><span data-bau-msg="Load demo data">Load demo data</span></label>
+                <button type="button" class="bau-btn" id="bauBtnPreview" onclick="bauPreview()" disabled="disabled" data-bau-msg="Build payload">Build payload</button>
+                <button type="button" class="bau-btn bau-btn-primary" id="bauBtnInstall" onclick="bauInstall()" disabled="disabled" data-bau-msg="Update selected">Update selected</button>
+            </div>
+            <div class="bau-table-wrap" id="bauTableWrap">
+                <table class="bau-table" id="bauTable">
+                    <thead>
+                        <tr>
+                            <th class="bau-col-check"><input type="checkbox" id="bauPageAll" title="Select or clear this page" data-bau-msg-title="Select or clear this page" onclick="bauTogglePage(this.checked)" /></th>
+                            <th data-bau-msg="Application">Application</th>
+                            <th data-bau-msg="Scope">Scope</th>
+                            <th data-bau-msg="Available update">Available update</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="bauBody"></tbody>
+                </table>
+            </div>
+            <div class="bau-pager">
+                <span id="bauRange" class="bau-muted"></span>
+                <span class="bau-spacer"></span>
+                <span id="bauPages" class="bau-pages"></span>
+                <span class="bau-spacer"></span>
+                <label class="bau-muted" for="bauPageSize" data-bau-msg="Records per page">Records per page</label>
+                <select id="bauPageSize" class="bau-select" onchange="bauSetPageSize(this.value)">
+                    <option value="10">10</option>
+                    <option value="50" selected="selected">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+        <div class="bau-help-link">
+            <a href="#" id="bauHelpLink" onclick="bauShowHelp(); return false;" data-bau-msg="How to use this page?">How to use this page?</a>
+        </div>
+        <div class="bau-card" id="bauPayloadCard" style="display:none">
+            <div class="bau-toolbar">
+                <strong data-bau-msg="Payload">Payload</strong>
+                <span class="bau-spacer"></span>
+                <button type="button" class="bau-btn" onclick="bauCopyPayload()" data-bau-msg="Copy JSON">Copy JSON</button>
+            </div>
+            <pre id="bauPayload" class="bau-pre"></pre>
+        </div>
+        <div class="bau-modal-backdrop" id="bauModal" style="display:none">
+            <div class="bau-modal" role="dialog" aria-modal="true" aria-labelledby="bauModalTitle">
+                <div class="bau-modal-header">
+                    <h3 id="bauModalTitle" class="bau-modal-title" data-bau-msg="Confirm batch update">Confirm batch update</h3>
+                </div>
+                <div class="bau-modal-body">
+                    <p id="bauModalSummary" class="bau-modal-summary"></p>
+                    <div id="bauModalList" class="bau-modal-list"></div>
+                    <p id="bauModalDemo" class="bau-modal-demo" style="display:none"></p>
+                    <p class="bau-modal-note" data-bau-msg="The update runs on the server and cannot be stopped from this page.">The update runs on the server and cannot be stopped from this page.</p>
+                </div>
+                <div class="bau-modal-footer">
+                    <button type="button" class="bau-btn" id="bauModalCancel" data-bau-msg="Cancel">Cancel</button>
+                    <button type="button" class="bau-btn bau-btn-primary" id="bauModalOk" data-bau-msg="Update">Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="bau-modal-backdrop" id="bauHelpModal" style="display:none">
+            <div class="bau-modal" role="dialog" aria-modal="true" aria-labelledby="bauHelpTitle">
+                <div class="bau-modal-header">
+                    <h3 id="bauHelpTitle" class="bau-modal-title" data-bau-msg="How to use this page?">How to use this page?</h3>
+                </div>
+                <div class="bau-modal-body bau-help">
+                    <h4 data-bau-msg="What this page does">What this page does</h4>
+                    <p data-bau-msg="Lists installed store applications that have an update compatible with the family release of this instance and installs the selected updates as one CI/CD batch, run as your user.">Lists installed store applications that have an update compatible with the family release of this instance and installs the selected updates as one CI/CD batch, run as your user.</p>
+
+                    <h4 data-bau-msg="Steps">Steps</h4>
+                    <ol>
+                        <li data-bau-msg="Select applications in the list. The header checkbox selects or clears the current page.">Select applications in the list. The header checkbox selects or clears the current page.</li>
+                        <li data-bau-msg="Click Build payload and review the JSON.">Click Build payload and review the JSON.</li>
+                        <li data-bau-msg="Click Update selected, then check the instance and the list in the confirmation dialog.">Click Update selected, then check the instance and the list in the confirmation dialog.</li>
+                        <li data-bau-msg="Follow the progress in the Batch install card. The list refreshes when the batch finishes.">Follow the progress in the Batch install card. The list refreshes when the batch finishes.</li>
+                    </ol>
+
+                    <h4 data-bau-msg="Good to know">Good to know</h4>
+                    <ul>
+                        <li id="bauHelpLimit"></li>
+                        <li data-bau-msg="You can reload or close the page during an install. The install continues on the server and the page resumes tracking when you open it again.">You can reload or close the page during an install. The install continues on the server and the page resumes tracking when you open it again.</li>
+                        <li id="bauHelpStale"></li>
+                        <li data-bau-msg="Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.">Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.</li>
+                        <li data-bau-msg="The Rollback link in the Batch install card opens the rollback context of the batch.">The Rollback link in the Batch install card opens the rollback context of the batch.</li>
+                        <li data-bau-msg="Requires the admin role and access to the CI/CD API.">Requires the admin role and access to the CI/CD API.</li>
+                        <li><a href="https://www.servicenow.com/docs/r/api-reference/rest-apis/cicd-api.html" target="_blank" rel="noopener" data-bau-msg="More information about the CI/CD API from ServiceNow Docs">More information about the CI/CD API from ServiceNow Docs</a></li>
+                    </ul>
+                </div>
+                <div class="bau-modal-footer">
+                    <button type="button" class="bau-btn bau-btn-primary" id="bauHelpClose" data-bau-msg="close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</j:jelly>

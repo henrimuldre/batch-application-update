@@ -1,0 +1,2462 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2026-11-17 16:38:08">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Batch Application Update v1.0
+
+UI page for admins that lists installed store applications with an update compatible with the instance family release, lets you select up to 100 of them and updates them in one batch through the CI/CD API (POST /api/sn_cicd/app/batch/install), run as the logged-in user.
+
+Contents:
+- UI Page: batch_app_update
+- Script Include: BatchAppUpdateAjax (client callable)
+- ACL batch_app_update (type ui_page, role admin)
+- ACL BatchAppUpdateAjax (type client_callable_script_include, role admin)
+- 2 ACL role links to the admin role
+
+All records are in the Global scope. No translations are included and no existing platform records are changed.
+
+Requirements:
+- admin role
+- Access to the CI/CD API for the user running the page
+
+After commit:
+1. Open /batch_app_update.do directly or using Next Experience UI /now/nav/ui/classic/params/target/batch_app_update.do
+2. Check that the build label and the application list load without an error in the status line
+3. Open "How to use this page?" for usage notes
+
+Translations and documentation: see the project README.</description>
+<inserted/>
+<name>Batch_Application_Update_v1.0</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>596d172a83a4df10bbfaf1d6feaad365</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>1dffdb6e83a4df10bbfaf1d6feaad359</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_role_aff9be1664e4535084c4ab4442e17732</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:13:47</sys_created_on><sys_id>aff9be1664e4535084c4ab4442e17732</sys_id><sys_mod_count>0</sys_mod_count><sys_name>BatchAppUpdateAjax.admin</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_security_acl display_value="BatchAppUpdateAjax">67f97e1664e4535084c4ab4442e17779</sys_security_acl><sys_update_name>sys_security_acl_role_aff9be1664e4535084c4ab4442e17732</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:13:47</sys_updated_on><sys_user_role display_value="admin" name="admin">2831a114c611228501d4ea6c309d626d</sys_user_role></sys_security_acl_role></record_update>]]></payload>
+<payload_hash>2054077210</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>11ffdb6e83a4df10bbfaf1d6feaad35b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1ea5d11b60000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<table>BatchAppUpdateAjax</table>
+<target_name>BatchAppUpdateAjax.admin</target_name>
+<type>Access Roles</type>
+<update_domain>global</update_domain>
+<update_guid>a65fd72ebda4df10b12dbe3729b9acad</update_guid>
+<update_guid_history>a65fd72ebda4df10b12dbe3729b9acad:2054077210,b3f9be1625e45350a90b877ee652285d:2054077210</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_58697ad264e4535084c4ab4442e177ab</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.BatchAppUpdateAjax&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description&gt;Client-callable GlideAjax processor for the batch_app_update UI page. getCandidates lists store applications with an update compatible with the current build. getActiveBatch, getBatchStatus and getBatchItems read sys_execution_tracker, sys_batch_install_plan and sys_batch_install_item to show and resume a running sn_cicd batch install. Requires admin.&lt;/description&gt;&lt;mobile_callable&gt;false&lt;/mobile_callable&gt;&lt;name&gt;BatchAppUpdateAjax&lt;/name&gt;&lt;sandbox_callable&gt;false&lt;/sandbox_callable&gt;&lt;script&gt;&lt;![CDATA[var BatchAppUpdateAjax = Class.create();
+BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+    BATCH_PREFIX: 'Batch Applications Update',
+    STALE_MINUTES: 60,
+
+    /* ---------- client callable ---------- */
+
+    getCandidates: function() {
+        if (!gs.hasRole('admin')) {
+            return this._accessError();
+        }
+
+        var buildName = gs.getProperty('glide.buildname');
+        var apps = [];
+        var seen = {};
+
+        var grSSA = new GlideRecord('sys_store_app');
+        grSSA.addEncodedQuery('install_dateISNOTEMPTY^hide_on_ui=false^nameNOT LIKE@^update_available=true');
+        grSSA.orderBy('name');
+        grSSA.query();
+
+        while (grSSA.next()) {
+            var name = grSSA.getValue('name');
+            if (seen[name]) {
+                continue;
+            }
+            seen[name] = true;
+
+            var installed = grSSA.getValue('version');
+            var target = this._highestCompatibleVersion(grSSA.getUniqueValue(), buildName);
+            if (!target || this._compareVersions(target, installed) &lt;= 0) {
+                continue;
+            }
+
+            apps.push({
+                id: grSSA.getUniqueValue(),
+                name: name,
+                scope: grSSA.getValue('scope'),
+                installedVersion: installed,
+                targetVersion: target,
+                demoDataLoaded: String(grSSA.getValue('demo_data')) === 'demo_data_loaded'
+            });
+        }
+
+        var war = gs.getProperty('glide.war', '') || gs.getProperty('current_war', '');
+        var warAssigned = gs.getProperty('glide.war.assigned', '');
+        var upgradePending = !!war &amp;&amp; !!warAssigned &amp;&amp; warAssigned !== war;
+
+        return JSON.stringify({
+            buildName: buildName,
+            batchPrefix: this.BATCH_PREFIX,
+            buildLabel: this._buildDescription(war) || buildName,
+            war: war,
+            warAssigned: warAssigned,
+            assignedLabel: upgradePending ? (this._buildDescription(warAssigned) || warAssigned) : null,
+            upgradePending: upgradePending,
+            staleMinutes: this.STALE_MINUTES,
+            apps: apps
+        });
+    },
+
+    getActiveBatch: function() {
+        if (!gs.hasRole('admin')) {
+            return this._accessError();
+        }
+        return JSON.stringify({
+            batch: this._findActiveBatch()
+        });
+    },
+
+    getBatchStatus: function() {
+        if (!gs.hasRole('admin')) {
+            return this._accessError();
+        }
+        var trackerId = String(this.getParameter('sysparm_tracker_id') || '');
+        var grTracker = new GlideRecord('sys_execution_tracker');
+        if (!trackerId || !grTracker.get(trackerId)) {
+            return JSON.stringify({
+                error: gs.getMessage('Execution tracker not found: {0}', [trackerId])
+            });
+        }
+        return JSON.stringify({
+            batch: this._describeBatch(grTracker)
+        });
+    },
+
+    getBatchItems: function() {
+        if (!gs.hasRole('admin')) {
+            return this._accessError();
+        }
+        var planId = String(this.getParameter('sysparm_plan_id') || '');
+        return JSON.stringify({
+            items: this._getItems(planId)
+        });
+    },
+
+    getMessages: function() {
+        //Translations for the UI page. gs.getMessage falls back to the key (English) when no record exists.
+        var keys = [];
+        try {
+            keys = JSON.parse(String(this.getParameter('sysparm_keys') || '[]'));
+        } catch (e) {
+            keys = [];
+        }
+        var messages = {};
+        for (var i = 0; i &lt; keys.length &amp;&amp; i &lt; 500; i++) {
+            var key = String(keys[i]);
+            messages[key] = gs.getMessage(key);
+        }
+        return JSON.stringify({
+            language: gs.getSession().getLanguage(),
+            messages: messages
+        });
+    },
+
+    /* ---------- batch helpers ---------- */
+
+    _findActiveBatch: function() {
+        var grTracker = new GlideRecord('sys_execution_tracker');
+        grTracker.addQuery('type', 'sys.applifecycle.operation');
+        grTracker.addQuery('name', 'STARTSWITH', this.BATCH_PREFIX);
+        grTracker.addQuery('state', 'IN', '0,1');
+        grTracker.orderByDesc('sys_created_on');
+        grTracker.setLimit(1);
+        grTracker.query();
+        return grTracker.next() ? this._describeBatch(grTracker) : null;
+    },
+
+    _describeBatch: function(grTracker) {
+        var state = grTracker.getValue('state');
+        var active = state === '0' || state === '1';
+        var idleMs = new GlideDateTime().getNumericValue() -
+            new GlideDateTime(grTracker.getValue('sys_updated_on')).getNumericValue();
+        var plan = this._findPlan(grTracker.getValue('name'));
+
+        return {
+            trackerId: grTracker.getUniqueValue(),
+            name: grTracker.getValue('name'),
+            state: state,
+            stateLabel: grTracker.getDisplayValue('state'),
+            active: active,
+            stale: active &amp;&amp; idleMs &gt; this.STALE_MINUTES * 60000,
+            idleMinutes: Math.floor(idleMs / 60000),
+            percent: parseInt(grTracker.getValue('percent_complete') || '0', 10),
+            message: grTracker.getValue('message') || '',
+            detail: grTracker.getValue('detail_message') || '',
+            node: grTracker.getValue('node') || '',
+            startTime: grTracker.getDisplayValue('start_time'),
+            updated: grTracker.getDisplayValue('sys_updated_on'),
+            startedBy: this._userDisplayName(grTracker.getValue('sys_created_by')),
+            planId: plan ? plan.getUniqueValue() : null,
+            planState: plan ? plan.getDisplayValue('state') : null,
+            planStateValue: plan ? plan.getValue('state') : null,
+            rollbackId: plan ? plan.getValue('rollback_context') : null,
+            rollbackNumber: plan ? plan.getDisplayValue('rollback_context') : null,
+            rollbackTable: plan &amp;&amp; !plan.rollback_context.nil() ? plan.rollback_context.getReferenceTable() : null
+        };
+    },
+
+    _findPlan: function(name) {
+        var plan = new GlideRecord('sys_batch_install_plan');
+        plan.addQuery('name', name);
+        plan.orderByDesc('sys_created_on');
+        plan.setLimit(1);
+        plan.query();
+        return plan.next() ? plan : null;
+    },
+
+    _getItems: function(planId) {
+        var items = [];
+        if (!planId) {
+            return items;
+        }
+        var grItem = new GlideRecord('sys_batch_install_item');
+        grItem.addQuery('batch_install_plan', planId);
+        grItem.orderBy('name');
+        grItem.query();
+        while (grItem.next()) {
+            var demo = String(grItem.getValue('demo_data'));
+            var appId = grItem.getValue('id');
+            items.push({
+                id: appId,
+                scope: this._appScope(appId),
+                name: grItem.getValue('name'),
+                version: grItem.getValue('version'),
+                state: grItem.getValue('state'),
+                stateLabel: grItem.getDisplayValue('state'),
+                statusMessage: grItem.getValue('status_message') || '',
+                reason: grItem.getValue('reason') || '',
+                demoData: demo === '1' || demo === 'true'
+            });
+        }
+        return items;
+    },
+
+    _appScope: function(appId) {
+        var app = new GlideRecord('sys_store_app');
+        if (appId &amp;&amp; app.get(appId)) {
+            return app.getValue('scope');
+        }
+        return '';
+    },
+
+    _userDisplayName: function(userName) {
+        var user = new GlideRecord('sys_user');
+        if (userName &amp;&amp; user.get('user_name', userName)) {
+            return user.getDisplayValue();
+        }
+        return userName || '';
+    },
+
+    _accessError: function() {
+        return JSON.stringify({
+            error: gs.getMessage('admin role required')
+        });
+    },
+
+    /* ---------- version helpers ---------- */
+
+    _highestCompatibleVersion: function(appId, buildName) {
+        var best = null;
+        var grVer = new GlideRecord('sys_app_version');
+        grVer.addEncodedQuery('source_app_id=' + appId + '^compatibilitiesLIKE' + buildName);
+        grVer.query();
+        while (grVer.next()) {
+            var v = grVer.getValue('version');
+            if (!best || this._compareVersions(v, best) &gt; 0) {
+                best = v;
+            }
+        }
+        return best;
+    },
+
+    _compareVersions: function(a, b) {
+        var pa = String(a || '').split('.');
+        var pb = String(b || '').split('.');
+        var len = Math.max(pa.length, pb.length);
+        for (var i = 0; i &lt; len; i++) {
+            var na = parseInt(pa[i] || '0', 10);
+            var nb = parseInt(pb[i] || '0', 10);
+            if (na !== nb) {
+                return na &gt; nb ? 1 : -1;
+            }
+        }
+        return 0;
+    },
+
+    _buildDescription: function(war) {
+        var m = /^glide-([a-z]+)-\d{2}-\d{2}-\d{4}__patch([0-9a-z]+)(?:-hotfix(\d+))?-\d{2}-\d{2}-\d{4}/i.exec(war || '');
+        if (!m) {
+            return null;
+        }
+        var family = m[1].charAt(0).toUpperCase() + m[1].substring(1).toLowerCase();
+        var desc = family + ' patch ' + m[2].toLowerCase();
+        if (m[3]) {
+            desc += ' hotfix ' + m[3];
+        }
+        return desc;
+    },
+
+    type: 'BatchAppUpdateAjax'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:13:43&lt;/sys_created_on&gt;&lt;sys_id&gt;58697ad264e4535084c4ab4442e177ab&lt;/sys_id&gt;&lt;sys_mod_count&gt;14&lt;/sys_mod_count&gt;&lt;sys_name&gt;BatchAppUpdateAjax&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_58697ad264e4535084c4ab4442e177ab&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-17 13:42:00&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;58697ad264e4535084c4ab4442e177ab&lt;/id&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:13:43&lt;/sys_created_on&gt;&lt;sys_id&gt;6af97e1664e4535084c4ab4442e17770&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-16 19:13:43&lt;/sys_updated_on&gt;&lt;table&gt;sys_script_include&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1742323169</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>51ffdb6e83a4df10bbfaf1d6feaad35a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1ea5ce90a0000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<table/>
+<target_name>BatchAppUpdateAjax</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>445f572e84a4df10046107442c6aa795</update_guid>
+<update_guid_history>445f572e84a4df10046107442c6aa795:1742323169,1da7ba2ea3281b504e237a5350f10817:1742323169,3306be2a03281b5092b7ee97062583c5:1358856728,ad356622b8a41b505d56426f0c150014:746667045,562b82aaeaa8d75082914a808ddfbf51:-1366382344,fcc5c2ea20e4d750580c89c3d0e5eeed:-804026584,67c48ee2c8e4d750b46c9af998405615:1468304879,0852ca6a3d64d750a2d36e30b7a6ef24:-1334041242,25a0422ac024d7509173839f58d2905f:2086264286,454042ea1724d750149012d90072fba5:485822577,ce2db96e02a0d750b653e567e43e12be:-1262178915,b80b8f5676a8535046cf67d6cd575863:1144863599,b109cf1e9b685350a4fc74122c227d81:-1852506946,4f7c769aade45350d13b6b799c7959ae:-410320924,0c6afa560ae453505dd6cfc9bb53c5d3:-1658158598,7ff9be16f0e453501d11713c43fe7361:-1472823785</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_role_bfcc72da64e4535084c4ab4442e177a6</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:26:05</sys_created_on><sys_id>bfcc72da64e4535084c4ab4442e177a6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>batch_app_update.admin</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_security_acl display_value="batch_app_update">a7cc72da64e4535084c4ab4442e17752</sys_security_acl><sys_update_name>sys_security_acl_role_bfcc72da64e4535084c4ab4442e177a6</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:26:05</sys_updated_on><sys_user_role display_value="admin" name="admin">2831a114c611228501d4ea6c309d626d</sys_user_role></sys_security_acl_role></record_update>]]></payload>
+<payload_hash>-1830705672</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>55ffdb6e83a4df10bbfaf1d6feaad35b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1ea5d65f10000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<table>batch_app_update</table>
+<target_name>batch_app_update.admin</target_name>
+<type>Access Roles</type>
+<update_domain>global</update_domain>
+<update_guid>047f9b2e6aa4df10313351cb12456164</update_guid>
+<update_guid_history>047f9b2e6aa4df10313351cb12456164:-1830705672,73cc72dacce453509243be1d8725e1b5:-1830705672</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_67f97e1664e4535084c4ab4442e17779</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><applies_to/><condition/><controlled_by_refs/><decision_type>allow</decision_type><description/><local_or_existing>Existing</local_or_existing><name>BatchAppUpdateAjax</name><operation display_value="execute">execute</operation><script/><security_attribute/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:13:46</sys_created_on><sys_id>67f97e1664e4535084c4ab4442e17779</sys_id><sys_mod_count>0</sys_mod_count><sys_name>BatchAppUpdateAjax</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_security_acl_67f97e1664e4535084c4ab4442e17779</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:13:46</sys_updated_on><type display_value="client_callable_script_include">client_callable_script_include</type></sys_security_acl></record_update>]]></payload>
+<payload_hash>-249277482</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>95ffdb6e83a4df10bbfaf1d6feaad35a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1ea5d11740000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<table>BatchAppUpdateAjax</table>
+<target_name>BatchAppUpdateAjax</target_name>
+<type>Access Control</type>
+<update_domain>global</update_domain>
+<update_guid>ea5f972e6fa4df105db2f91ce033ba7b</update_guid>
+<update_guid_history>ea5f972e6fa4df105db2f91ce033ba7b:-249277482,6ff9be161de4535005f3a56391c8742f:-249277482</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_ui_page_b9973ede64a4535084c4ab4442e1773f</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_page"&gt;&lt;sys_ui_page action="INSERT_OR_UPDATE"&gt;&lt;category&gt;general&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[var BAU = {
+    title: 'Batch application update',
+    msgs: {},
+    language: '',
+    apps: [],
+    selected: {},
+    page: 1,
+    pageSize: 50,
+    maxBatch: 100,
+    staleMinutes: 60,
+    batchPrefix: '',
+    loadDemoData: false,
+    payload: null,
+    busy: false,
+    batch: null,
+    items: [],
+    itemsPlanId: null,
+    scopeToName: {},
+    lastScope: null,
+    watching: false,
+    pollTimer: null,
+    pollToken: 0,
+    pollDelay: 10000,
+    pollMin: 10000,
+    pollMax: 60000,
+    pollStep: 10000,
+    pollTimeoutMs: 30000,
+    pollErrors: 0,
+    maxPollErrors: 5,
+    pollWhenVisible: false,
+    topTitle: null,
+    titleObserver: null
+};
+
+/* ---------- translations ---------- */
+
+//English text is the sys_ui_message key. Every key passed to bauT() must be listed here.
+var BAU_MSG = [
+    //static text in the HTML
+    'Batch application update',
+    'Store applications with an update compatible with build:',
+    'Batch install',
+    'Batch name',
+    'Current app',
+    'Started by',
+    'Started',
+    'Last update',
+    'Node',
+    'Plan state',
+    'Execution tracker',
+    'Install plan',
+    'Rollback',
+    'Batch items',
+    'Application',
+    'Version',
+    'State',
+    'Message',
+    'Refresh',
+    'Clear selection',
+    'Build payload',
+    'Update selected',
+    'Select or clear this page',
+    'Scope',
+    'Available update',
+    'Records per page',
+    'Payload',
+    'Copy JSON',
+    'Confirm batch update',
+    'The update runs on the server and cannot be stopped from this page.',
+    'Cancel',
+    'Update',
+    //dynamic text in the client script
+    'no answer within {0} s',
+    'invalid response from server',
+    'Loading...',
+    'upgrade to {0} assigned',
+    'An upgrade to {0} is assigned (glide.war.assigned differs from glide.war). Consider installing store application updates after the upgrade has finished.',
+    '{0} applications still have a compatible update.',
+    '{0} applications have a compatible update.',
+    'Could not load applications: {0}',
+    'No applications with a compatible update.',
+    'Demo data',
+    'Showing {0}-{1} of {2}',
+    'First page',
+    'Previous page',
+    'Page {0}',
+    'Next page',
+    'Last page',
+    '{0} of {1} selected',
+    'A batch install is already running',
+    'Limit of {0} per batch reached. Unselect another application first.',
+    'Limit of {0} reached. {1} application(s) on this page were not selected.',
+    'Selected all applications on this page.',
+    'Cleared this page.',
+    'Selection cleared.',
+    'Nothing selected.',
+    'Payload built for {0} applications. Update is disabled while another batch runs.',
+    'Payload built for {0} applications. Review it, then click Update selected.',
+    'Payload copied to clipboard.',
+    'Copy failed. Select the JSON and copy it manually.',
+    'Clipboard not available. Select the JSON and copy it manually.',
+    'Update {0} application(s) on {1}?',
+    'Load demo data',
+    'Demo data will be loaded for all {0} applications.',
+    'Update {0}',
+    'Build the payload first.',
+    'Session token (g_ck) not found. Is the UI page set to Direct?',
+    'Checking for a running batch...',
+    'Another batch install is running. Wait for it to finish.',
+    'Could not check for a running batch: {0}',
+    'Submitting batch install...',
+    'No progress id in the response: {0}',
+    'Submitted',
+    'Batch install submitted for {0} applications.',
+    'Another batch install started in the meantime. Nothing was sent.',
+    'Update request failed: {0}',
+    'A batch install is running, started by {0} at {1}. Update is disabled until it finishes.',
+    'A batch install is running. Update is disabled until it finishes.',
+    'Batch "{0}" has not updated for {1} minutes and may have stalled. Update is enabled. Check the execution tracker before starting another batch.',
+    'Unknown',
+    '{0} (no update for {1} min)',
+    '{0} ({1} min ago)',
+    '{0} applications | {1}',
+    'Loading updates',
+    'Stop watching',
+    'Resume watching',
+    'Stopped watching. The install continues on the server.',
+    'Paused while the tab is in the background',
+    'Last check {0} | next in {1} s',
+    'Stopped watching after {0} failed checks ({1}). The install continues on the server. Click Resume watching or reload the page.',
+    'Status check failed ({0}/{1}): {2}. Retrying in {3} s.',
+    'Finished, last check {0}',
+    'Batch finished: {0}.',
+    //help dialog
+    'How to use this page?',
+    'close',
+    'What this page does',
+    'Lists installed store applications that have an update compatible with the family release of this instance and installs the selected updates as one CI/CD batch, run as your user.',
+    'Steps',
+    'Select applications in the list. The header checkbox selects or clears the current page.',
+    'Click Build payload and review the JSON.',
+    'Click Update selected, then check the instance and the list in the confirmation dialog.',
+    'Follow the progress in the Batch install card. The list refreshes when the batch finishes.',
+    'Good to know',
+    'A batch holds up to {0} applications. Only one batch can run at a time. Update is disabled while another batch is running.',
+    'You can reload or close the page during an install. The install continues on the server and the page resumes tracking when you open it again.',
+    'A batch without progress for {0} minutes is shown as stalled and no longer blocks Update. Check the execution tracker before starting another batch.',
+    'Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.',
+    'The Rollback link in the Batch install card opens the rollback context of the batch.',
+    'Requires the admin role and access to the CI/CD API.',
+    'More information about the CI/CD API from ServiceNow Docs'
+];
+
+var BAU_MSG_INDEX = {};
+BAU_MSG.forEach(function(key) {
+    BAU_MSG_INDEX[key] = true;
+});
+
+function bauT(key, args) {
+    if (!BAU_MSG_INDEX[key] &amp;&amp; window.console) {
+        console.warn('[BAU] message key not in BAU_MSG: ' + key);
+    }
+    var text = BAU.msgs[key] || key;
+    if (args) {
+        text = text.replace(/\{(\d+)\}/g, function(match, index) {
+            var value = args[index];
+            return value !== undefined &amp;&amp; value !== null ? String(value) : match;
+        });
+    }
+    return text;
+}
+
+//like bauT, but placeholders can be DOM nodes (for example bold spans)
+function bauAppendTemplate(parent, key, parts) {
+    var text = bauT(key);
+    var re = /\{(\d+)\}/g;
+    var last = 0;
+    var m;
+    while ((m = re.exec(text)) !== null) {
+        if (m.index &gt; last) {
+            parent.appendChild(document.createTextNode(text.substring(last, m.index)));
+        }
+        var part = parts[m[1]];
+        if (part === undefined || part === null) {
+            parent.appendChild(document.createTextNode(m[0]));
+        } else if (typeof part === 'object') {
+            parent.appendChild(part);
+        } else {
+            parent.appendChild(document.createTextNode(String(part)));
+        }
+        last = re.lastIndex;
+    }
+    if (last &lt; text.length) {
+        parent.appendChild(document.createTextNode(text.substring(last)));
+    }
+}
+
+function bauApplyStaticMessages() {
+    var nodes = document.querySelectorAll('[data-bau-msg]');
+    for (var i = 0; i &lt; nodes.length; i++) {
+        nodes[i].textContent = bauT(nodes[i].getAttribute('data-bau-msg'));
+    }
+    var titled = document.querySelectorAll('[data-bau-msg-title]');
+    for (var j = 0; j &lt; titled.length; j++) {
+        titled[j].title = bauT(titled[j].getAttribute('data-bau-msg-title'));
+    }
+}
+
+function bauLoadMessages() {
+    return bauAjax('getMessages', {
+        sysparm_keys: JSON.stringify(BAU_MSG)
+    }, 15000).then(function(res) {
+        BAU.msgs = res.messages || {};
+        BAU.language = res.language || '';
+    }).catch(function() {
+        //English fallback: bauT returns the key itself
+        BAU.msgs = {};
+    }).then(function() {
+        bauApplyStaticMessages();
+    });
+}
+
+/* ---------- helpers ---------- */
+
+function bauEl(id) {
+    return document.getElementById(id);
+}
+
+function bauSetStatus(msg, type) {
+    var el = bauEl('bauStatus');
+    el.textContent = msg || '';
+    el.className = 'bau-status' + (type ? ' bau-status-' + type : '');
+}
+
+function bauSpan(text, cls) {
+    var s = document.createElement('span');
+    s.textContent = text || '';
+    if (cls) {
+        s.className = cls;
+    }
+    return s;
+}
+
+function bauCell(text, cls) {
+    var td = document.createElement('td');
+    td.textContent = text || '';
+    if (cls) {
+        td.className = cls;
+    }
+    return td;
+}
+
+function bauSetLink(id, href, text) {
+    var el = bauEl(id);
+    el.innerHTML = '';
+    if (href) {
+        var a = document.createElement('a');
+        a.href = href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = text || href;
+        el.appendChild(a);
+    } else {
+        el.textContent = text || '-';
+    }
+}
+
+function bauSelectedCount() {
+    return Object.keys(BAU.selected).length;
+}
+
+function bauTotalPages() {
+    return Math.max(1, Math.ceil(BAU.apps.length / BAU.pageSize));
+}
+
+function bauPageRows() {
+    var start = (BAU.page - 1) * BAU.pageSize;
+    return BAU.apps.slice(start, start + BAU.pageSize);
+}
+
+function bauTopDocument() {
+    try {
+        if (window.top &amp;&amp; window.top !== window) {
+            return window.top.document;
+        }
+    } catch (e) {
+        //outer frame not accessible
+    }
+    return null;
+}
+
+//Sets "&lt;title&gt; | &lt;suffix&gt;" on the outer window, where the suffix is the shell's own title (for example "ServiceNow")
+function bauApplyTopTitle(topDoc, title) {
+    var current = topDoc.title || '';
+    if (current === BAU.topTitle) {
+        return;
+    }
+    var sep = current.lastIndexOf(' | ');
+    var suffix = sep &gt; -1 ? current.substring(sep + 3) : current;
+    var wanted = suffix &amp;&amp; suffix !== title ? title + ' | ' + suffix : title;
+    BAU.topTitle = wanted;
+    topDoc.title = wanted;
+}
+
+function bauSetTitle() {
+    var title = bauT(BAU.title);
+    document.title = title;
+
+    var topDoc = bauTopDocument();
+    if (!topDoc) {
+        return;
+    }
+    bauApplyTopTitle(topDoc, title);
+
+    //The Next UI shell sets its own title after the page loads, so let's re-apply ours
+    if (window.MutationObserver &amp;&amp; !BAU.titleObserver &amp;&amp; topDoc.head) {
+        BAU.titleObserver = new MutationObserver(function() {
+            bauApplyTopTitle(topDoc, title);
+        });
+        BAU.titleObserver.observe(topDoc.head, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+        var stop = function() {
+            if (BAU.titleObserver) {
+                BAU.titleObserver.disconnect();
+                BAU.titleObserver = null;
+            }
+        };
+        setTimeout(stop, 15000);
+        window.addEventListener('pagehide', stop);
+    }
+}
+
+function bauAjax(method, params, timeoutMs) {
+    return new Promise(function(resolve, reject) {
+        var done = false;
+        var timer = setTimeout(function() {
+            if (done) {
+                return;
+            }
+            done = true;
+            reject(new Error(bauT('no answer within {0} s', [Math.round((timeoutMs || 30000) / 1000)])));
+        }, timeoutMs || 30000);
+
+        var ga = new GlideAjax('BatchAppUpdateAjax');
+        ga.addParam('sysparm_name', method);
+        Object.keys(params || {}).forEach(function(key) {
+            ga.addParam(key, params[key]);
+        });
+        ga.getXMLAnswer(function(answer) {
+            if (done) {
+                return;
+            }
+            done = true;
+            clearTimeout(timer);
+            var res;
+            try {
+                res = JSON.parse(answer || '{}');
+            } catch (e) {
+                reject(new Error(bauT('invalid response from server')));
+                return;
+            }
+            if (res.error) {
+                reject(new Error(res.error));
+                return;
+            }
+            resolve(res);
+        });
+    });
+}
+
+function bauApi(method, path, body) {
+    var opts = {
+        method: method,
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-UserToken': window.g_ck
+        }
+    };
+    if (body) {
+        opts.body = JSON.stringify(body);
+    }
+    return fetch(path, opts).then(function(resp) {
+        return resp.text().then(function(text) {
+            var json = null;
+            try {
+                json = JSON.parse(text);
+            } catch (e) {
+                //non-JSON body
+            }
+            if (!resp.ok) {
+                var detail = json ? JSON.stringify(json.error || json) : text;
+                throw new Error('HTTP ' + resp.status + ': ' + detail);
+            }
+            return json;
+        });
+    });
+}
+
+/* ---------- application list ---------- */
+
+function bauLoad(doneMsg, doneType) {
+    bauSetStatus(bauT('Loading...'));
+    bauInvalidatePayload();
+    return bauAjax('getCandidates', {}, 60000).then(function(res) {
+        BAU.apps = res.apps || [];
+        BAU.selected = {};
+        BAU.page = 1;
+        BAU.batchPrefix = res.batchPrefix || '';
+        if (res.staleMinutes) {
+            BAU.staleMinutes = res.staleMinutes;
+        }
+        var buildEl = bauEl('bauBuild');
+        buildEl.textContent = res.buildLabel || res.buildName || '';
+        buildEl.title = res.war || '';
+        var upgradeEl = bauEl('bauUpgrade');
+        var upgradeBanner = bauEl('bauUpgradeBanner');
+        if (res.upgradePending) {
+            upgradeEl.textContent = '\u00B7 ' + bauT('upgrade to {0} assigned', [res.assignedLabel]);
+            upgradeEl.title = res.warAssigned || '';
+            upgradeBanner.textContent = bauT('An upgrade to {0} is assigned (glide.war.assigned differs from glide.war). Consider installing store application updates after the upgrade has finished.', [res.assignedLabel]);
+            upgradeBanner.style.display = 'block';
+        } else {
+            upgradeEl.textContent = '';
+            upgradeEl.title = '';
+            upgradeBanner.style.display = 'none';
+        }
+        bauRender();
+        if (doneMsg) {
+            bauSetStatus(doneMsg + ' ' + bauT('{0} applications still have a compatible update.', [BAU.apps.length]), doneType);
+        } else {
+            bauSetStatus(bauT('{0} applications have a compatible update.', [BAU.apps.length]));
+        }
+    }).catch(function(err) {
+        bauSetStatus(bauT('Could not load applications: {0}', [err.message]), 'error');
+    });
+}
+
+function bauRender() {
+    bauRenderRows();
+    bauRenderPager();
+    bauUpdateSelectionUi();
+}
+
+function bauRenderRows() {
+    var body = bauEl('bauBody');
+    body.innerHTML = '';
+    var rows = bauPageRows();
+
+    if (!rows.length) {
+        var trEmpty = document.createElement('tr');
+        var tdEmpty = bauCell(bauT('No applications with a compatible update.'), 'bau-empty');
+        tdEmpty.colSpan = 5;
+        trEmpty.appendChild(tdEmpty);
+        body.appendChild(trEmpty);
+        return;
+    }
+
+    rows.forEach(function(app) {
+        var tr = document.createElement('tr');
+        if (BAU.selected[app.id]) {
+            tr.className = 'bau-row-selected';
+        }
+
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = !!BAU.selected[app.id];
+        cb.disabled = BAU.busy;
+        cb.onclick = function(e) {
+            e.stopPropagation();
+            bauToggleRow(app, cb.checked, cb, tr);
+        };
+        var tdCheck = document.createElement('td');
+        tdCheck.className = 'bau-col-check';
+        tdCheck.appendChild(cb);
+        tr.appendChild(tdCheck);
+
+        tr.appendChild(bauCell(app.name, 'bau-col-name'));
+        tr.appendChild(bauCell(app.scope, 'bau-mono bau-muted'));
+
+        var tdVer = document.createElement('td');
+        tdVer.className = 'bau-mono';
+        tdVer.appendChild(bauSpan(app.installedVersion, 'bau-muted'));
+        tdVer.appendChild(bauSpan(' \u2192 ', 'bau-arrow'));
+        tdVer.appendChild(bauSpan(app.targetVersion, 'bau-target'));
+        tr.appendChild(tdVer);
+
+        var tdDemo = document.createElement('td');
+        if (app.demoDataLoaded) {
+            tdDemo.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
+        }
+        tr.appendChild(tdDemo);
+
+        tr.onclick = function() {
+            if (BAU.busy) {
+                return;
+            }
+            cb.checked = !cb.checked;
+            bauToggleRow(app, cb.checked, cb, tr);
+        };
+        body.appendChild(tr);
+    });
+}
+
+function bauRenderPager() {
+    var total = BAU.apps.length;
+    var pages = bauTotalPages();
+    if (BAU.page &gt; pages) {
+        BAU.page = pages;
+    }
+
+    var from = total ? (BAU.page - 1) * BAU.pageSize + 1 : 0;
+    var to = Math.min(BAU.page * BAU.pageSize, total);
+    bauEl('bauRange').textContent = bauT('Showing {0}-{1} of {2}', [from, to, total]);
+
+    var nav = bauEl('bauPages');
+    nav.innerHTML = '';
+    nav.appendChild(bauPageBtn('\u21E4', 1, BAU.page === 1, bauT('First page')));
+    nav.appendChild(bauPageBtn('\u2190', BAU.page - 1, BAU.page === 1, bauT('Previous page')));
+
+    var end = Math.min(pages, Math.max(1, BAU.page - 2) + 4);
+    var start = Math.max(1, end - 4);
+    for (var p = start; p &lt;= end; p++) {
+        var b = bauPageBtn(String(p), p, false, bauT('Page {0}', [p]));
+        if (p === BAU.page) {
+            b.className += ' bau-page-active';
+        }
+        nav.appendChild(b);
+    }
+
+    nav.appendChild(bauPageBtn('\u2192', BAU.page + 1, BAU.page === pages, bauT('Next page')));
+    nav.appendChild(bauPageBtn('\u21E5', pages, BAU.page === pages, bauT('Last page')));
+}
+
+function bauPageBtn(label, page, disabled, title) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'bau-page-btn';
+    b.textContent = label;
+    b.title = title;
+    b.disabled = disabled;
+    b.onclick = function() {
+        bauGoToPage(page);
+    };
+    return b;
+}
+
+function bauInstallBlocked() {
+    return !!(BAU.batch &amp;&amp; BAU.batch.active &amp;&amp; !BAU.batch.stale);
+}
+
+function bauUpdateSelectionUi() {
+    var count = bauSelectedCount();
+    var chip = bauEl('bauCount');
+    chip.textContent = bauT('{0} of {1} selected', [count, BAU.maxBatch]);
+    chip.className = 'bau-chip' + (count &gt;= BAU.maxBatch ? ' bau-chip-full' : '');
+
+    bauEl('bauBtnRefresh').disabled = BAU.busy;
+    bauEl('bauBtnClear').disabled = BAU.busy || count === 0;
+    bauEl('bauBtnPreview').disabled = BAU.busy || count === 0;
+    var demo = bauEl('bauDemoData');
+    demo.disabled = BAU.busy;
+    demo.checked = BAU.loadDemoData;
+
+    var install = bauEl('bauBtnInstall');
+    install.disabled = BAU.busy || !BAU.payload || bauInstallBlocked();
+    install.title = bauInstallBlocked() ? bauT('A batch install is already running') : '';
+
+    var rows = bauPageRows();
+    var onPage = 0;
+    rows.forEach(function(app) {
+        if (BAU.selected[app.id]) {
+            onPage++;
+        }
+    });
+    var head = bauEl('bauPageAll');
+    head.disabled = BAU.busy;
+    head.checked = rows.length &gt; 0 &amp;&amp; onPage === rows.length;
+    head.indeterminate = onPage &gt; 0 &amp;&amp; onPage &lt; rows.length;
+
+    bauEl('bauTable').className = 'bau-table' + (BAU.busy ? ' bau-locked' : '');
+}
+
+/* ---------- paging ---------- */
+
+function bauGoToPage(page) {
+    BAU.page = Math.min(Math.max(1, page), bauTotalPages());
+    bauRender();
+    bauEl('bauTableWrap').scrollTop = 0;
+}
+
+function bauSetPageSize(size) {
+    BAU.pageSize = parseInt(size, 10) || 50;
+    BAU.page = 1;
+    bauRender();
+}
+
+/* ---------- selection ---------- */
+
+function bauToggleRow(app, checked, cb, tr) {
+    if (BAU.busy) {
+        cb.checked = !checked;
+        return;
+    }
+    if (checked) {
+        if (!BAU.selected[app.id] &amp;&amp; bauSelectedCount() &gt;= BAU.maxBatch) {
+            cb.checked = false;
+            bauSetStatus(bauT('Limit of {0} per batch reached. Unselect another application first.', [BAU.maxBatch]), 'warn');
+            return;
+        }
+        BAU.selected[app.id] = true;
+    } else {
+        delete BAU.selected[app.id];
+    }
+    tr.className = checked ? 'bau-row-selected' : '';
+    bauInvalidatePayload();
+    bauUpdateSelectionUi();
+}
+
+function bauTogglePage(checked) {
+    if (BAU.busy) {
+        return;
+    }
+    var skipped = 0;
+    bauPageRows().forEach(function(app) {
+        if (!checked) {
+            delete BAU.selected[app.id];
+            return;
+        }
+        if (BAU.selected[app.id]) {
+            return;
+        }
+        if (bauSelectedCount() &gt;= BAU.maxBatch) {
+            skipped++;
+            return;
+        }
+        BAU.selected[app.id] = true;
+    });
+    bauInvalidatePayload();
+    bauRenderRows();
+    bauUpdateSelectionUi();
+
+    if (skipped) {
+        bauSetStatus(bauT('Limit of {0} reached. {1} application(s) on this page were not selected.', [BAU.maxBatch, skipped]), 'warn');
+    } else {
+        bauSetStatus(checked ? bauT('Selected all applications on this page.') : bauT('Cleared this page.'));
+    }
+}
+
+function bauClearSelection() {
+    if (BAU.busy) {
+        return;
+    }
+    BAU.selected = {};
+    bauInvalidatePayload();
+    bauRenderRows();
+    bauUpdateSelectionUi();
+    bauSetStatus(bauT('Selection cleared.'));
+}
+
+/* ---------- payload ---------- */
+
+function bauSetDemoData(checked) {
+    if (BAU.busy) {
+        bauEl('bauDemoData').checked = BAU.loadDemoData;
+        return;
+    }
+    BAU.loadDemoData = !!checked;
+    bauInvalidatePayload();
+    bauUpdateSelectionUi();
+}
+
+function bauInvalidatePayload() {
+    BAU.payload = null;
+    bauEl('bauPayload').textContent = '';
+    bauEl('bauPayloadCard').style.display = 'none';
+    bauEl('bauBtnInstall').disabled = true;
+}
+
+function bauPreview() {
+    if (BAU.busy) {
+        return;
+    }
+    var sel = BAU.apps.filter(function(app) {
+        return BAU.selected[app.id];
+    });
+    bauInvalidatePayload();
+    if (!BAU.batchPrefix) {
+        bauSetStatus(bauT('Could not load applications: {0}', ['batch prefix missing']), 'error');
+        return;
+    }
+    if (!sel.length) {
+        bauSetStatus(bauT('Nothing selected.'), 'warn');
+        return;
+    }
+
+    BAU.payload = {
+        packages: sel.map(function(app) {
+            return {
+                id: app.id,
+                load_demo_data: BAU.loadDemoData,
+                displayName: app.name,
+                type: 'application',
+                requested_version: app.targetVersion
+            };
+        }),
+        name: BAU.batchPrefix + ' - ' + new Date().toISOString()
+    };
+    bauEl('bauPayload').textContent = JSON.stringify(BAU.payload, null, 1);
+    bauEl('bauPayloadCard').style.display = 'block';
+    bauUpdateSelectionUi();
+
+    if (bauInstallBlocked()) {
+        bauSetStatus(bauT('Payload built for {0} applications. Update is disabled while another batch runs.', [sel.length]), 'warn');
+    } else {
+        bauSetStatus(bauT('Payload built for {0} applications. Review it, then click Update selected.', [sel.length]), 'ok');
+    }
+}
+
+function bauCopyPayload() {
+    if (!BAU.payload) {
+        return;
+    }
+    var text = JSON.stringify(BAU.payload, null, 1);
+    if (navigator.clipboard &amp;&amp; navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+            bauSetStatus(bauT('Payload copied to clipboard.'), 'ok');
+        }, function() {
+            bauSetStatus(bauT('Copy failed. Select the JSON and copy it manually.'), 'warn');
+        });
+    } else {
+        bauSetStatus(bauT('Clipboard not available. Select the JSON and copy it manually.'), 'warn');
+    }
+}
+
+/* ---------- confirmation modal ---------- */
+
+function bauConfirm(packages, onOk) {
+    var modal = bauEl('bauModal');
+    var okBtn = bauEl('bauModalOk');
+    var cancelBtn = bauEl('bauModalCancel');
+
+    var appsById = {};
+    BAU.apps.forEach(function(app) {
+        appsById[app.id] = app;
+    });
+    var demoCount = packages.filter(function(pkg) {
+        return pkg.load_demo_data;
+    }).length;
+    var demoLine = bauEl('bauModalDemo');
+    if (demoCount) {
+        demoLine.textContent = bauT('Demo data will be loaded for all {0} applications.', [demoCount]);
+        demoLine.style.display = 'block';
+    } else {
+        demoLine.textContent = '';
+        demoLine.style.display = 'none';
+    }
+
+    var summary = bauEl('bauModalSummary');
+    summary.innerHTML = '';
+    var countNode = bauSpan(String(packages.length), 'bau-strong');
+    var hostNode = bauSpan(window.location.host, 'bau-strong');
+    bauAppendTemplate(summary, 'Update {0} application(s) on {1}?', [countNode, hostNode]);
+
+    var list = bauEl('bauModalList');
+    list.innerHTML = '';
+    packages.forEach(function(pkg) {
+        var app = appsById[pkg.id] || {};
+        var row = document.createElement('div');
+        row.className = 'bau-modal-item';
+        row.appendChild(bauSpan(pkg.displayName, 'bau-modal-item-name'));
+        if (pkg.load_demo_data) {
+            row.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
+        }
+        var ver = document.createElement('span');
+        ver.className = 'bau-mono';
+        ver.appendChild(bauSpan(app.installedVersion || '?', 'bau-muted'));
+        ver.appendChild(bauSpan(' \u2192 ', 'bau-arrow'));
+        ver.appendChild(bauSpan(pkg.requested_version, 'bau-target'));
+        row.appendChild(ver);
+        list.appendChild(row);
+    });
+
+    okBtn.textContent = bauT('Update {0}', [packages.length]);
+
+    function onKey(e) {
+        if (e.key === 'Escape') {
+            close(false);
+        }
+    }
+
+    function close(confirmed) {
+        modal.style.display = 'none';
+        document.removeEventListener('keydown', onKey);
+        okBtn.onclick = null;
+        cancelBtn.onclick = null;
+        modal.onclick = null;
+        if (confirmed) {
+            onOk();
+        }
+    }
+
+    okBtn.onclick = function() {
+        close(true);
+    };
+    cancelBtn.onclick = function() {
+        close(false);
+    };
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            close(false);
+        }
+    };
+    document.addEventListener('keydown', onKey);
+
+    modal.style.display = 'flex';
+    list.scrollTop = 0;
+    cancelBtn.focus();
+}
+
+/* ---------- help dialog ---------- */
+
+function bauShowHelp() {
+    var modal = bauEl('bauHelpModal');
+    var closeBtn = bauEl('bauHelpClose');
+
+    bauEl('bauHelpLimit').textContent = bauT('A batch holds up to {0} applications. Only one batch can run at a time. Update is disabled while another batch is running.', [BAU.maxBatch]);
+    bauEl('bauHelpStale').textContent = bauT('A batch without progress for {0} minutes is shown as stalled and no longer blocks Update. Check the execution tracker before starting another batch.', [BAU.staleMinutes]);
+
+    function onKey(e) {
+        if (e.key === 'Escape') {
+            close();
+        }
+    }
+
+    function close() {
+        modal.style.display = 'none';
+        document.removeEventListener('keydown', onKey);
+        closeBtn.onclick = null;
+        modal.onclick = null;
+    }
+
+    closeBtn.onclick = close;
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            close();
+        }
+    };
+    document.addEventListener('keydown', onKey);
+
+    modal.style.display = 'flex';
+    bauEl('bauHelpModal').querySelector('.bau-modal-body').scrollTop = 0;
+    closeBtn.focus();
+}
+
+/* ---------- install ---------- */
+
+function bauInstall() {
+    if (BAU.busy) {
+        return;
+    }
+    if (!BAU.payload) {
+        bauSetStatus(bauT('Build the payload first.'), 'warn');
+        return;
+    }
+    if (!window.g_ck) {
+        bauSetStatus(bauT('Session token (g_ck) not found. Is the UI page set to Direct?'), 'error');
+        return;
+    }
+
+    bauSetStatus(bauT('Checking for a running batch...'));
+    bauAjax('getActiveBatch', {}, 30000).then(function(res) {
+        if (res.batch &amp;&amp; res.batch.active &amp;&amp; !res.batch.stale) {
+            bauShowBatch(res.batch);
+            bauSetStatus(bauT('Another batch install is running. Wait for it to finish.'), 'warn');
+            return;
+        }
+        bauSetStatus('');
+        bauConfirm(BAU.payload.packages, bauStartInstall);
+    }).catch(function(err) {
+        bauSetStatus(bauT('Could not check for a running batch: {0}', [err.message]), 'error');
+    });
+}
+
+function bauStartInstall() {
+    if (BAU.busy || !BAU.payload) {
+        return;
+    }
+    var payload = BAU.payload;
+
+    BAU.busy = true;
+    bauRenderRows();
+    bauUpdateSelectionUi();
+    bauSetStatus(bauT('Checking for a running batch...'));
+
+    //Second check right before the POST, in case another admin started a batch while the dialog was open
+    bauAjax('getActiveBatch', {}, 30000).then(function(res) {
+        if (res.batch &amp;&amp; res.batch.active &amp;&amp; !res.batch.stale) {
+            var blocked = new Error('blocked');
+            blocked.blocked = true;
+            blocked.batch = res.batch;
+            throw blocked;
+        }
+        bauSetStatus(bauT('Submitting batch install...'));
+        return bauApi('POST', '/api/sn_cicd/app/batch/install', payload);
+    }).then(function(json) {
+        var r = (json &amp;&amp; json.result) || {};
+        var links = r.links || {};
+        var trackerId = links.progress ? links.progress.id : null;
+        if (!trackerId) {
+            throw new Error(bauT('No progress id in the response: {0}', [JSON.stringify(json)]));
+        }
+
+        BAU.busy = false;
+        BAU.selected = {};
+        bauInvalidatePayload();
+        bauRenderRows();
+
+        BAU.items = [];
+        BAU.itemsPlanId = null;
+        BAU.scopeToName = {};
+        BAU.lastScope = null;
+        bauRenderItems();
+
+        BAU.batch = {
+            trackerId: trackerId,
+            name: payload.name,
+            state: '0',
+            stateLabel: bauT('Submitted'),
+            active: true,
+            stale: false,
+            percent: 0
+        };
+        bauRenderBatch();
+        bauUpdateBanner();
+        bauUpdateSelectionUi();
+        bauSetStatus(bauT('Batch install submitted for {0} applications.', [payload.packages.length]), 'ok');
+
+        bauStopWatching();
+        bauStartWatching();
+    }).catch(function(err) {
+        BAU.busy = false;
+        bauRenderRows();
+        if (err &amp;&amp; err.blocked) {
+            bauShowBatch(err.batch);
+            bauSetStatus(bauT('Another batch install started in the meantime. Nothing was sent.'), 'warn');
+        } else {
+            bauSetStatus(bauT('Update request failed: {0}', [err &amp;&amp; err.message ? err.message : err]), 'error');
+        }
+        bauUpdateSelectionUi();
+    });
+}
+
+/* ---------- batch tracking ---------- */
+
+function bauCurrentScope(detail) {
+    var m = /Loading update:\s*([^\/\s]+)\//.exec(detail || '');
+    return m ? m[1] : null;
+}
+
+var BAU_KIND = {
+    tracker: {
+        '0': '',
+        '1': 'running',
+        '2': 'ok',
+        '3': 'fail',
+        '4': 'warn'
+    },
+    plan: {
+        ready: '',
+        in_progress: 'running',
+        installed: 'ok',
+        partial_install: 'warn',
+        failed: 'fail',
+        invalid: 'fail',
+        rolled_back: 'warn'
+    },
+    item: {
+        ready: '',
+        in_progress: 'running',
+        installed: 'ok',
+        failed: 'fail',
+        invalid: 'fail',
+        rolled_back: 'warn'
+    }
+};
+
+function bauKind(map, value) {
+    return Object.prototype.hasOwnProperty.call(map, value) ? map[value] : '';
+}
+
+function bauStateKind(b) {
+    if (!b) {
+        return '';
+    }
+    if (b.active &amp;&amp; b.stale) {
+        return 'warn';
+    }
+    return bauKind(BAU_KIND.tracker, String(b.state));
+}
+
+//Final outcome: the plan state when it is final (it can be partial_install), otherwise the tracker state
+function bauOutcomeKind(b) {
+    var planKind = b ? bauKind(BAU_KIND.plan, b.planStateValue || '') : '';
+    if (planKind &amp;&amp; planKind !== 'running') {
+        return planKind;
+    }
+    return bauStateKind(b);
+}
+
+function bauItemKind(item) {
+    return bauKind(BAU_KIND.item, String(item.state || ''));
+}
+
+function bauUpdateBanner() {
+    var el = bauEl('bauBanner');
+    var b = BAU.batch;
+    if (b &amp;&amp; b.active &amp;&amp; !b.stale) {
+        el.className = 'bau-banner bau-banner-info';
+        el.textContent = b.startedBy &amp;&amp; b.startTime ?
+            bauT('A batch install is running, started by {0} at {1}. Update is disabled until it finishes.', [b.startedBy, b.startTime]) :
+            bauT('A batch install is running. Update is disabled until it finishes.');
+        el.style.display = 'block';
+    } else if (b &amp;&amp; b.active &amp;&amp; b.stale) {
+        el.className = 'bau-banner bau-banner-warn';
+        el.textContent = bauT('Batch "{0}" has not updated for {1} minutes and may have stalled. Update is enabled. Check the execution tracker before starting another batch.', [b.name, b.idleMinutes]);
+        el.style.display = 'block';
+    } else {
+        el.style.display = 'none';
+    }
+}
+
+function bauRenderBatch() {
+    var b = BAU.batch;
+    var card = bauEl('bauRunCard');
+    if (!b) {
+        card.style.display = 'none';
+        return;
+    }
+    card.style.display = 'block';
+
+    var kind = b.active ? bauStateKind(b) : bauOutcomeKind(b);
+    var pill = bauEl('bauRunState');
+    var stateLabel = b.stateLabel || bauT('Unknown');
+    pill.textContent = b.active &amp;&amp; b.stale ? bauT('{0} (no update for {1} min)', [stateLabel, b.idleMinutes]) : stateLabel;
+    pill.className = 'bau-pill' + (kind ? ' bau-pill-' + kind : '');
+
+    var pct = isNaN(b.percent) ? 0 : Math.max(0, Math.min(100, b.percent));
+    bauEl('bauRunPercent').textContent = pct + '%';
+    var bar = bauEl('bauRunBar');
+    bar.style.width = pct + '%';
+    bar.className = 'bau-progress-bar' +
+        (kind === 'ok' ? ' bau-progress-ok' : '') +
+        (kind === 'fail' ? ' bau-progress-fail' : '') +
+        (kind === 'warn' ? ' bau-progress-warn' : '');
+
+    bauEl('bauRunMessage').textContent = b.message || '';
+    bauEl('bauRunDetail').textContent = b.detail || '';
+
+    var scope = b.active ? bauCurrentScope(b.detail) : null;
+    bauEl('bauRunCurrent').textContent = scope ?
+        (BAU.scopeToName[scope] ? BAU.scopeToName[scope] + ' (' + scope + ')' : scope) : '-';
+
+    bauEl('bauRunName').textContent = b.name || '-';
+    bauEl('bauRunStartedBy').textContent = b.startedBy || '-';
+    bauEl('bauRunStarted').textContent = b.startTime || '-';
+    bauEl('bauRunUpdated').textContent = b.updated ? bauT('{0} ({1} min ago)', [b.updated, b.idleMinutes]) : '-';
+    bauEl('bauRunNode').textContent = b.node || '-';
+    var planCell = bauEl('bauRunPlanState');
+    planCell.innerHTML = '';
+    if (b.planState) {
+        var planKind = bauKind(BAU_KIND.plan, b.planStateValue || '');
+        planCell.appendChild(bauSpan(b.planState, 'bau-pill' + (planKind ? ' bau-pill-' + planKind : '')));
+    } else {
+        planCell.textContent = '-';
+    }
+
+    bauSetLink('bauRunTracker', b.trackerId ? '/sys_execution_tracker.do?sys_id=' + b.trackerId : null, b.trackerId);
+    bauSetLink('bauRunPlan', b.planId ? '/sys_batch_install_plan.do?sys_id=' + b.planId : null, b.planId);
+    bauSetLink('bauRunRollback',
+        b.rollbackId &amp;&amp; b.rollbackTable ? '/' + b.rollbackTable + '.do?sys_id=' + b.rollbackId : null,
+        b.rollbackNumber || b.rollbackId);
+
+    bauRenderWatchButton();
+}
+
+function bauRenderItems() {
+    var card = bauEl('bauItemsCard');
+    if (!BAU.items.length) {
+        card.style.display = 'none';
+        return;
+    }
+    card.style.display = 'block';
+
+    var counts = {};
+    BAU.items.forEach(function(item) {
+        var key = item.stateLabel || item.state || bauT('Unknown');
+        counts[key] = (counts[key] || 0) + 1;
+    });
+    var countText = Object.keys(counts).map(function(k) {
+        return k + ': ' + counts[k];
+    }).join(', ');
+    bauEl('bauItemsSummary').textContent = bauT('{0} applications | {1}', [BAU.items.length, countText]);
+
+    var current = BAU.batch &amp;&amp; BAU.batch.active ? bauCurrentScope(BAU.batch.detail) : null;
+    var body = bauEl('bauItemsBody');
+    body.innerHTML = '';
+
+    BAU.items.forEach(function(item) {
+        var tr = document.createElement('tr');
+        var isCurrent = !!current &amp;&amp; item.scope === current;
+        if (isCurrent) {
+            tr.className = 'bau-row-current';
+        }
+
+        var tdName = bauCell(item.name, 'bau-col-name');
+        if (item.demoData) {
+            tdName.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
+        }
+        if (isCurrent) {
+            tdName.appendChild(bauSpan(bauT('Loading updates'), 'bau-badge'));
+        }
+        tr.appendChild(tdName);
+
+        tr.appendChild(bauCell(item.version, 'bau-mono'));
+
+        var kind = bauItemKind(item);
+        var tdState = document.createElement('td');
+        tdState.appendChild(bauSpan(item.stateLabel || item.state || '-', 'bau-pill' + (kind ? ' bau-pill-' + kind : '')));
+        tr.appendChild(tdState);
+
+        tr.appendChild(bauCell([item.statusMessage, item.reason].filter(Boolean).join(' | '), 'bau-muted'));
+        body.appendChild(tr);
+    });
+}
+
+function bauLoadItems() {
+    var b = BAU.batch;
+    if (!b || !b.planId) {
+        return Promise.resolve();
+    }
+    var planId = b.planId;
+    return bauAjax('getBatchItems', {
+        sysparm_plan_id: planId
+    }, 60000).then(function(res) {
+        BAU.items = res.items || [];
+        BAU.itemsPlanId = planId;
+        BAU.scopeToName = {};
+        BAU.items.forEach(function(item) {
+            if (item.scope) {
+                BAU.scopeToName[item.scope] = item.name;
+            }
+        });
+        bauRenderItems();
+        bauRenderBatch();
+    });
+}
+
+function bauShowBatch(batch) {
+    BAU.batch = batch;
+    bauRenderBatch();
+    bauUpdateBanner();
+    bauUpdateSelectionUi();
+    if (batch.planId &amp;&amp; BAU.itemsPlanId !== batch.planId) {
+        bauLoadItems().then(null, function() {});
+    }
+    if (batch.active &amp;&amp; !BAU.watching) {
+        bauStartWatching();
+    }
+}
+
+function bauRenderWatchButton() {
+    var btn = bauEl('bauBtnWatch');
+    btn.style.display = BAU.batch &amp;&amp; BAU.batch.active ? '' : 'none';
+    btn.textContent = BAU.watching ? bauT('Stop watching') : bauT('Resume watching');
+}
+
+function bauToggleWatch() {
+    if (BAU.watching) {
+        bauStopWatching(bauT('Stopped watching. The install continues on the server.'));
+    } else {
+        bauEl('bauRunNote').textContent = '';
+        bauStartWatching();
+    }
+}
+
+function bauStartWatching() {
+    if (!BAU.batch) {
+        return;
+    }
+    BAU.watching = true;
+    BAU.pollDelay = BAU.pollMin;
+    BAU.pollErrors = 0;
+    BAU.pollWhenVisible = false;
+    bauRenderWatchButton();
+    bauSchedulePoll(0);
+}
+
+function bauStopWatching(msg) {
+    BAU.watching = false;
+    BAU.pollToken++;
+    if (BAU.pollTimer) {
+        clearTimeout(BAU.pollTimer);
+        BAU.pollTimer = null;
+    }
+    bauRenderWatchButton();
+    if (msg) {
+        bauEl('bauRunNote').textContent = msg;
+    }
+}
+
+function bauSchedulePoll(delay) {
+    if (BAU.pollTimer) {
+        clearTimeout(BAU.pollTimer);
+    }
+    BAU.pollTimer = setTimeout(bauPoll, delay);
+}
+
+function bauPoll() {
+    BAU.pollTimer = null;
+    if (!BAU.watching || !BAU.batch) {
+        return;
+    }
+    if (document.hidden) {
+        BAU.pollWhenVisible = true;
+        bauEl('bauRunChecked').textContent = bauT('Paused while the tab is in the background');
+        return;
+    }
+
+    var token = ++BAU.pollToken;
+    bauAjax('getBatchStatus', {
+        sysparm_tracker_id: BAU.batch.trackerId
+    }, BAU.pollTimeoutMs).then(function(res) {
+        if (token !== BAU.pollToken || !BAU.watching) {
+            return;
+        }
+        BAU.pollErrors = 0;
+        bauEl('bauRunNote').textContent = '';
+
+        var prev = BAU.batch || {};
+        var b = res.batch;
+        var changed = b.updated !== prev.updated || b.state !== prev.state;
+        BAU.batch = b;
+
+        var scope = bauCurrentScope(b.detail);
+        if (b.planId &amp;&amp; (BAU.itemsPlanId !== b.planId || scope !== BAU.lastScope)) {
+            bauLoadItems().then(null, function() {});
+        }
+        BAU.lastScope = scope;
+
+        bauRenderBatch();
+        bauRenderItems();
+        bauUpdateBanner();
+        bauUpdateSelectionUi();
+
+        if (!b.active) {
+            bauFinish();
+            return;
+        }
+
+        BAU.pollDelay = changed ? BAU.pollMin : Math.min(BAU.pollMax, BAU.pollDelay + BAU.pollStep);
+        bauEl('bauRunChecked').textContent = bauT('Last check {0} | next in {1} s',
+            [new Date().toLocaleTimeString(), Math.round(BAU.pollDelay / 1000)]);
+        bauSchedulePoll(BAU.pollDelay);
+    }).catch(function(err) {
+        if (token !== BAU.pollToken || !BAU.watching) {
+            return;
+        }
+        BAU.pollErrors++;
+        if (BAU.pollErrors &gt;= BAU.maxPollErrors) {
+            bauStopWatching(bauT('Stopped watching after {0} failed checks ({1}). The install continues on the server. Click Resume watching or reload the page.',
+                [BAU.pollErrors, err.message]));
+            return;
+        }
+        BAU.pollDelay = Math.min(BAU.pollMax, BAU.pollDelay + BAU.pollStep);
+        bauEl('bauRunNote').textContent = bauT('Status check failed ({0}/{1}): {2}. Retrying in {3} s.',
+            [BAU.pollErrors, BAU.maxPollErrors, err.message, Math.round(BAU.pollDelay / 1000)]);
+        bauSchedulePoll(BAU.pollDelay);
+    });
+}
+
+function bauFinish() {
+    bauStopWatching();
+    bauEl('bauRunChecked').textContent = bauT('Finished, last check {0}', [new Date().toLocaleTimeString()]);
+
+    bauLoadItems().then(null, function() {}).then(function() {
+        var b = BAU.batch;
+        var kind = bauOutcomeKind(b);
+        bauRenderBatch();
+        bauUpdateBanner();
+        bauUpdateSelectionUi();
+        bauLoad(bauT('Batch finished: {0}.', [b.planState || b.stateLabel || bauT('Unknown')]),
+            kind === 'ok' ? 'ok' : (kind === 'fail' ? 'error' : 'warn'));
+    });
+}
+
+function bauCheckActiveBatch() {
+    return bauAjax('getActiveBatch', {}, 30000).then(function(res) {
+        if (res.batch) {
+            bauShowBatch(res.batch);
+        }
+        return res.batch;
+    });
+}
+
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden &amp;&amp; BAU.watching &amp;&amp; BAU.pollWhenVisible) {
+        BAU.pollWhenVisible = false;
+        bauSchedulePoll(0);
+    }
+});
+
+/* ---------- init ---------- */
+
+addLoadEvent(function() {
+    //Translations first, so every text below is rendered in the user's language
+    bauLoadMessages().then(function() {
+        bauSetTitle();
+        bauLoad();
+        bauCheckActiveBatch().catch(function(err) {
+            bauSetStatus(bauT('Could not check for a running batch: {0}', [err.message]), 'warn');
+        });
+    });
+});]]&gt;&lt;/client_script&gt;&lt;description&gt;Admin page to list store applications with a compatible update, select them and run a sn_cicd batch install as the logged-in user. Data comes from Script Include BatchAppUpdateAjax.&lt;/description&gt;&lt;direct&gt;false&lt;/direct&gt;&lt;endpoint/&gt;&lt;html&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null"&gt;
+    &lt;style&gt;
+        .bau-wrap {
+            padding: 20px 24px;
+            color: #1f2937;
+            font-size: 14px;
+        }
+
+        .bau-title {
+            margin: 0 0 4px 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .bau-subtitle {
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+
+        .bau-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .bau-card-body {
+            padding: 12px 16px;
+        }
+
+        .bau-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #eef0f3;
+            flex-wrap: wrap;
+        }
+
+        .bau-spacer {
+            flex: 1;
+        }
+
+        .bau-btn {
+            border: 1px solid #d0d5dd;
+            background: #fff;
+            color: #1f2937;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .bau-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .bau-btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+            background: #fff;
+        }
+
+        .bau-btn-primary {
+            background: #0b5cab;
+            border-color: #0b5cab;
+            color: #fff;
+        }
+
+        .bau-btn-primary:hover,
+        .bau-btn-primary:focus,
+        .bau-btn-primary:active {
+            background: #094a8a;
+            color: #fff;
+        }
+
+        .bau-btn-primary:disabled {
+            background: #0b5cab;
+        }
+
+        .bau-chip {
+            background: #eef2f7;
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .bau-chip-full {
+            background: #fdecc8;
+            color: #8a5a00;
+        }
+
+        .bau-status {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .bau-status-warn {
+            color: #b45309;
+        }
+
+        .bau-status-error {
+            color: #b91c1c;
+        }
+
+        .bau-status-ok {
+            color: #15803d;
+        }
+
+        .bau-banner {
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .bau-banner-info {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        .bau-banner-warn {
+            background: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .bau-table-wrap {
+            max-height: calc(100vh - 290px);
+            overflow: auto;
+        }
+
+        .bau-items-wrap {
+            max-height: 420px;
+        }
+
+        .bau-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bau-table th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #f9fafb;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .bau-table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #f1f3f5;
+            vertical-align: middle;
+        }
+
+        .bau-table tbody tr {
+            cursor: pointer;
+        }
+
+        .bau-table tbody tr:hover {
+            background: #f6f9fc;
+        }
+
+        .bau-table tbody tr.bau-row-selected {
+            background: #eaf2fd;
+        }
+
+        .bau-table.bau-locked tbody tr {
+            cursor: default;
+            opacity: 0.6;
+        }
+
+        .bau-items-table tbody tr {
+            cursor: default;
+        }
+
+        .bau-items-table tbody tr.bau-row-current {
+            background: #fffbeb;
+        }
+
+        .bau-col-check {
+            width: 36px;
+        }
+
+        .bau-col-name {
+            font-weight: 500;
+        }
+
+        .bau-mono {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", monospace;
+            font-size: 16px;
+        }
+
+        .bau-upgrade {
+            color: #b45309;
+            margin-left: 8px;
+        }
+
+        .bau-muted {
+            color: #6b7280;
+        }
+
+        .bau-arrow {
+            color: #9ca3af;
+        }
+
+        .bau-target {
+            color: #15803d;
+            font-weight: 600;
+        }
+
+        .bau-badge {
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .bau-empty {
+            text-align: center;
+            color: #6b7280;
+            padding: 24px;
+        }
+
+        .bau-pager {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-top: 1px solid #eef0f3;
+            background: #fafbfc;
+        }
+
+        .bau-pages {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .bau-page-btn {
+            min-width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #374151;
+            font-size: 13px;
+        }
+
+        .bau-page-btn:hover {
+            background: #eceff3;
+        }
+
+        .bau-page-btn:disabled {
+            color: #c4c8cf;
+            cursor: default;
+            background: transparent;
+        }
+
+        .bau-page-active {
+            background: #e2e6eb;
+            font-weight: 600;
+        }
+
+        .bau-select {
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 13px;
+            background: #fff;
+        }
+
+        .bau-pre {
+            margin: 0;
+            padding: 12px 16px;
+            max-height: 360px;
+            overflow: auto;
+            background: #f9fafb;
+            border: none;
+            border-radius: 0;
+            font-size: 12px;
+        }
+
+        .bau-pill {
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #eef2f7;
+            color: #374151;
+        }
+
+        .bau-pill-running {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .bau-pill-ok {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .bau-pill-fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .bau-pill-warn {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .bau-progress {
+            height: 8px;
+            background: #eef0f3;
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 4px 0 10px 0;
+        }
+
+        .bau-progress-bar {
+            height: 100%;
+            width: 0;
+            background: #0b5cab;
+        }
+
+        .bau-progress-ok {
+            background: #15803d;
+        }
+
+        .bau-progress-fail {
+            background: #b91c1c;
+        }
+
+        .bau-progress-warn {
+            background: #d97706;
+        }
+
+        .bau-detail {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", monospace;
+            font-size: 12px;
+            color: #6b7280;
+            word-break: break-all;
+            margin-top: 4px;
+        }
+
+        .bau-kv {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 4px 12px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .bau-kv a {
+            color: #0b5cab;
+        }
+
+        .bau-strong {
+            font-weight: 600;
+        }
+
+        .bau-modal-backdrop {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(17, 24, 39, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .bau-modal {
+            background: #fff;
+            border-radius: 12px;
+            width: 680px;
+            max-width: calc(100vw - 32px);
+            max-height: calc(100vh - 64px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .bau-modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eef0f3;
+        }
+
+        .bau-modal-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .bau-modal-body {
+            padding: 16px 20px;
+            overflow: auto;
+        }
+
+        .bau-modal-summary {
+            margin: 0 0 12px 0;
+        }
+
+        .bau-modal-list {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .bau-modal-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 7px 12px;
+            border-bottom: 1px solid #f1f3f5;
+            font-size: 13px;
+        }
+
+        .bau-modal-item-name {
+            flex: 1;
+        }
+
+        .bau-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+            cursor: pointer;
+            margin-right: 4px;
+        }
+
+        .bau-modal-demo {
+            margin: 12px 0 0 0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .bau-modal-note {
+            color: #b45309;
+            margin: 12px 0 0 0;
+            font-size: 13px;
+        }
+
+        .bau-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding: 12px 20px;
+            border-top: 1px solid #eef0f3;
+        }
+
+        .bau-help-link {
+            margin: -8px 0 16px 4px;
+            font-size: 13px;
+        }
+
+        .bau-help-link a {
+            color: #0b5cab;
+        }
+
+        .bau-help h4 {
+            margin: 14px 0 6px 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .bau-help h4:first-child {
+            margin-top: 0;
+        }
+
+        .bau-help p,
+        .bau-help li {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bau-help ol,
+        .bau-help ul {
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+
+        .bau-help a {
+            color: #0b5cab;
+        }
+    &lt;/style&gt;
+    &lt;div class="bau-wrap"&gt;
+        &lt;h2 class="bau-title" data-bau-msg="Batch application update"&gt;Batch application update&lt;/h2&gt;
+        &lt;div class="bau-subtitle"&gt;&lt;span data-bau-msg="Store applications with an update compatible with build:"&gt;Store applications with an update compatible with build:&lt;/span&gt;&amp;#160;&lt;span id="bauBuild" class="bau-mono"&gt;...&lt;/span&gt;&lt;span id="bauUpgrade" class="bau-upgrade"&gt;&lt;/span&gt;&lt;/div&gt;
+        &lt;div id="bauUpgradeBanner" class="bau-banner bau-banner-warn" style="display:none"&gt;&lt;/div&gt;
+        &lt;div id="bauBanner" class="bau-banner" style="display:none"&gt;&lt;/div&gt;
+        &lt;div class="bau-card" id="bauRunCard" style="display:none"&gt;
+            &lt;div class="bau-toolbar"&gt;
+                &lt;strong data-bau-msg="Batch install"&gt;Batch install&lt;/strong&gt;
+                &lt;span id="bauRunState" class="bau-pill"&gt;&lt;/span&gt;
+                &lt;span id="bauRunPercent" class="bau-muted"&gt;&lt;/span&gt;
+                &lt;span class="bau-spacer"&gt;&lt;/span&gt;
+                &lt;span id="bauRunChecked" class="bau-muted"&gt;&lt;/span&gt;
+                &lt;button type="button" class="bau-btn" id="bauBtnWatch" onclick="bauToggleWatch()" style="display:none"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="bau-card-body"&gt;
+                &lt;div class="bau-progress"&gt;
+                    &lt;div id="bauRunBar" class="bau-progress-bar"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div id="bauRunMessage"&gt;&lt;/div&gt;
+                &lt;div id="bauRunDetail" class="bau-detail"&gt;&lt;/div&gt;
+                &lt;div id="bauRunNote" class="bau-status bau-status-warn"&gt;&lt;/div&gt;
+                &lt;div class="bau-kv"&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Batch name"&gt;Batch name&lt;/span&gt;&lt;span id="bauRunName"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Current app"&gt;Current app&lt;/span&gt;&lt;span id="bauRunCurrent"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Started by"&gt;Started by&lt;/span&gt;&lt;span id="bauRunStartedBy"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Started"&gt;Started&lt;/span&gt;&lt;span id="bauRunStarted"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Last update"&gt;Last update&lt;/span&gt;&lt;span id="bauRunUpdated"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Node"&gt;Node&lt;/span&gt;&lt;span id="bauRunNode" class="bau-mono"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Plan state"&gt;Plan state&lt;/span&gt;&lt;span id="bauRunPlanState"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Execution tracker"&gt;Execution tracker&lt;/span&gt;&lt;span id="bauRunTracker"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Install plan"&gt;Install plan&lt;/span&gt;&lt;span id="bauRunPlan"&gt;&lt;/span&gt;
+                    &lt;span class="bau-muted" data-bau-msg="Rollback"&gt;Rollback&lt;/span&gt;&lt;span id="bauRunRollback"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="bau-card" id="bauItemsCard" style="display:none"&gt;
+            &lt;div class="bau-toolbar"&gt;
+                &lt;strong data-bau-msg="Batch items"&gt;Batch items&lt;/strong&gt;
+                &lt;span id="bauItemsSummary" class="bau-muted"&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="bau-table-wrap bau-items-wrap"&gt;
+                &lt;table class="bau-table bau-items-table"&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th data-bau-msg="Application"&gt;Application&lt;/th&gt;
+                            &lt;th data-bau-msg="Version"&gt;Version&lt;/th&gt;
+                            &lt;th data-bau-msg="State"&gt;State&lt;/th&gt;
+                            &lt;th data-bau-msg="Message"&gt;Message&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody id="bauItemsBody"&gt;&lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="bau-card"&gt;
+            &lt;div class="bau-toolbar"&gt;
+                &lt;button type="button" class="bau-btn" id="bauBtnRefresh" onclick="bauLoad()" data-bau-msg="Refresh"&gt;Refresh&lt;/button&gt;
+                &lt;button type="button" class="bau-btn" id="bauBtnClear" onclick="bauClearSelection()" disabled="disabled" data-bau-msg="Clear selection"&gt;Clear selection&lt;/button&gt;
+                &lt;span id="bauCount" class="bau-chip"&gt;&lt;/span&gt;
+                &lt;span id="bauStatus" class="bau-status"&gt;&lt;/span&gt;
+                &lt;span class="bau-spacer"&gt;&lt;/span&gt;
+                &lt;label class="bau-check" for="bauDemoData"&gt;&lt;input type="checkbox" id="bauDemoData" onclick="bauSetDemoData(this.checked)" /&gt;&lt;span data-bau-msg="Load demo data"&gt;Load demo data&lt;/span&gt;&lt;/label&gt;
+                &lt;button type="button" class="bau-btn" id="bauBtnPreview" onclick="bauPreview()" disabled="disabled" data-bau-msg="Build payload"&gt;Build payload&lt;/button&gt;
+                &lt;button type="button" class="bau-btn bau-btn-primary" id="bauBtnInstall" onclick="bauInstall()" disabled="disabled" data-bau-msg="Update selected"&gt;Update selected&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="bau-table-wrap" id="bauTableWrap"&gt;
+                &lt;table class="bau-table" id="bauTable"&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th class="bau-col-check"&gt;&lt;input type="checkbox" id="bauPageAll" title="Select or clear this page" data-bau-msg-title="Select or clear this page" onclick="bauTogglePage(this.checked)" /&gt;&lt;/th&gt;
+                            &lt;th data-bau-msg="Application"&gt;Application&lt;/th&gt;
+                            &lt;th data-bau-msg="Scope"&gt;Scope&lt;/th&gt;
+                            &lt;th data-bau-msg="Available update"&gt;Available update&lt;/th&gt;
+                            &lt;th&gt;&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody id="bauBody"&gt;&lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+            &lt;div class="bau-pager"&gt;
+                &lt;span id="bauRange" class="bau-muted"&gt;&lt;/span&gt;
+                &lt;span class="bau-spacer"&gt;&lt;/span&gt;
+                &lt;span id="bauPages" class="bau-pages"&gt;&lt;/span&gt;
+                &lt;span class="bau-spacer"&gt;&lt;/span&gt;
+                &lt;label class="bau-muted" for="bauPageSize" data-bau-msg="Records per page"&gt;Records per page&lt;/label&gt;
+                &lt;select id="bauPageSize" class="bau-select" onchange="bauSetPageSize(this.value)"&gt;
+                    &lt;option value="10"&gt;10&lt;/option&gt;
+                    &lt;option value="50" selected="selected"&gt;50&lt;/option&gt;
+                    &lt;option value="100"&gt;100&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="bau-help-link"&gt;
+            &lt;a href="#" id="bauHelpLink" onclick="bauShowHelp(); return false;" data-bau-msg="How to use this page?"&gt;How to use this page?&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class="bau-card" id="bauPayloadCard" style="display:none"&gt;
+            &lt;div class="bau-toolbar"&gt;
+                &lt;strong data-bau-msg="Payload"&gt;Payload&lt;/strong&gt;
+                &lt;span class="bau-spacer"&gt;&lt;/span&gt;
+                &lt;button type="button" class="bau-btn" onclick="bauCopyPayload()" data-bau-msg="Copy JSON"&gt;Copy JSON&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;pre id="bauPayload" class="bau-pre"&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+        &lt;div class="bau-modal-backdrop" id="bauModal" style="display:none"&gt;
+            &lt;div class="bau-modal" role="dialog" aria-modal="true" aria-labelledby="bauModalTitle"&gt;
+                &lt;div class="bau-modal-header"&gt;
+                    &lt;h3 id="bauModalTitle" class="bau-modal-title" data-bau-msg="Confirm batch update"&gt;Confirm batch update&lt;/h3&gt;
+                &lt;/div&gt;
+                &lt;div class="bau-modal-body"&gt;
+                    &lt;p id="bauModalSummary" class="bau-modal-summary"&gt;&lt;/p&gt;
+                    &lt;div id="bauModalList" class="bau-modal-list"&gt;&lt;/div&gt;
+                    &lt;p id="bauModalDemo" class="bau-modal-demo" style="display:none"&gt;&lt;/p&gt;
+                    &lt;p class="bau-modal-note" data-bau-msg="The update runs on the server and cannot be stopped from this page."&gt;The update runs on the server and cannot be stopped from this page.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="bau-modal-footer"&gt;
+                    &lt;button type="button" class="bau-btn" id="bauModalCancel" data-bau-msg="Cancel"&gt;Cancel&lt;/button&gt;
+                    &lt;button type="button" class="bau-btn bau-btn-primary" id="bauModalOk" data-bau-msg="Update"&gt;Update&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="bau-modal-backdrop" id="bauHelpModal" style="display:none"&gt;
+            &lt;div class="bau-modal" role="dialog" aria-modal="true" aria-labelledby="bauHelpTitle"&gt;
+                &lt;div class="bau-modal-header"&gt;
+                    &lt;h3 id="bauHelpTitle" class="bau-modal-title" data-bau-msg="How to use this page?"&gt;How to use this page?&lt;/h3&gt;
+                &lt;/div&gt;
+                &lt;div class="bau-modal-body bau-help"&gt;
+                    &lt;h4 data-bau-msg="What this page does"&gt;What this page does&lt;/h4&gt;
+                    &lt;p data-bau-msg="Lists installed store applications that have an update compatible with the family release of this instance and installs the selected updates as one CI/CD batch, run as your user."&gt;Lists installed store applications that have an update compatible with the family release of this instance and installs the selected updates as one CI/CD batch, run as your user.&lt;/p&gt;
+
+                    &lt;h4 data-bau-msg="Steps"&gt;Steps&lt;/h4&gt;
+                    &lt;ol&gt;
+                        &lt;li data-bau-msg="Select applications in the list. The header checkbox selects or clears the current page."&gt;Select applications in the list. The header checkbox selects or clears the current page.&lt;/li&gt;
+                        &lt;li data-bau-msg="Click Build payload and review the JSON."&gt;Click Build payload and review the JSON.&lt;/li&gt;
+                        &lt;li data-bau-msg="Click Update selected, then check the instance and the list in the confirmation dialog."&gt;Click Update selected, then check the instance and the list in the confirmation dialog.&lt;/li&gt;
+                        &lt;li data-bau-msg="Follow the progress in the Batch install card. The list refreshes when the batch finishes."&gt;Follow the progress in the Batch install card. The list refreshes when the batch finishes.&lt;/li&gt;
+                    &lt;/ol&gt;
+
+                    &lt;h4 data-bau-msg="Good to know"&gt;Good to know&lt;/h4&gt;
+                    &lt;ul&gt;
+                        &lt;li id="bauHelpLimit"&gt;&lt;/li&gt;
+                        &lt;li data-bau-msg="You can reload or close the page during an install. The install continues on the server and the page resumes tracking when you open it again."&gt;You can reload or close the page during an install. The install continues on the server and the page resumes tracking when you open it again.&lt;/li&gt;
+                        &lt;li id="bauHelpStale"&gt;&lt;/li&gt;
+                        &lt;li data-bau-msg="Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded."&gt;Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.&lt;/li&gt;
+                        &lt;li data-bau-msg="The Rollback link in the Batch install card opens the rollback context of the batch."&gt;The Rollback link in the Batch install card opens the rollback context of the batch.&lt;/li&gt;
+                        &lt;li data-bau-msg="Requires the admin role and access to the CI/CD API."&gt;Requires the admin role and access to the CI/CD API.&lt;/li&gt;
+                        &lt;li&gt;&lt;a href="https://www.servicenow.com/docs/r/api-reference/rest-apis/cicd-api.html" target="_blank" rel="noopener" data-bau-msg="More information about the CI/CD API from ServiceNow Docs"&gt;More information about the CI/CD API from ServiceNow Docs&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+                &lt;div class="bau-modal-footer"&gt;
+                    &lt;button type="button" class="bau-btn bau-btn-primary" id="bauHelpClose" data-bau-msg="close"&gt;Close&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/j:jelly&gt;]]&gt;&lt;/html&gt;&lt;name&gt;batch_app_update&lt;/name&gt;&lt;processing_script/&gt;&lt;sys_class_name&gt;sys_ui_page&lt;/sys_class_name&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:26:03&lt;/sys_created_on&gt;&lt;sys_id&gt;b9973ede64a4535084c4ab4442e1773f&lt;/sys_id&gt;&lt;sys_mod_count&gt;27&lt;/sys_mod_count&gt;&lt;sys_name&gt;batch_app_update&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_page_b9973ede64a4535084c4ab4442e1773f&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-17 16:34:53&lt;/sys_updated_on&gt;&lt;/sys_ui_page&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;b9973ede64a4535084c4ab4442e1773f&lt;/id&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:26:03&lt;/sys_created_on&gt;&lt;sys_id&gt;1bcc72da64e4535084c4ab4442e17747&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-16 19:26:03&lt;/sys_updated_on&gt;&lt;table&gt;sys_ui_page&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>2113889760</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>99ffdb6e83a4df10bbfaf1d6feaad35b</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1ea5d47b00000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<table/>
+<target_name>batch_app_update</target_name>
+<type>UI Page</type>
+<update_domain>global</update_domain>
+<update_guid>426fd72eeba4df100950f0735a869eef</update_guid>
+<update_guid_history>426fd72eeba4df100950f0735a869eef:2113889760,b93f932ef1a4df10fbc97c379e71f006:2113889760,27fe9beaf6a4df1096dda7f20f848010:-156304896,358d83eae4289f101322c10d302f5495:-1749707980,9eb6b6aa8e281b50528ac9bbfcccd587:-1888957938,267476660b281b50d96991b6dfc7830e:732478640,c4727622d7281b507bf987b2d434b5d0:-1975539168,a77c6e626ce41b503dbb0feec1e26fee:619016881,d92be6ae2da41b50504daf3e7d759fb8:2084507153,6759ee6a60a41b50f030ef4270fad728:1269301919,782f8222fd6cd7503f1a8530c5497413:-987161081,f94cca26f2e8d750e75dbcb7ab3e6a59:-1333605854,4d1742a6fc28d7507e0462fa1b1837e3:-500700049,0482ce6e8464d75053bd5222dd3c745d:1699767436,5c6ffda21324d75084ffd2e710ceb4f0:1045568718,ef6b5f96f5e0935049982755d794d519:76880302,a4ec839280e85350ecf415e74e1b9e90:-1378582854,692b879686a853501ec4b09b7bd7e28d:-103821441,7a64075e00285350c69d0885f43dab13:-1475997185,4d9307da63285350f9508c563edb03f0:325578368,8c434b9a5a285350af65b2b91bdff525:918705613,6b02cfd64f285350574c17cb7bb8d057:-301396401,5b314b565928535059b1d2ae63c9988a:576092814,92218756cf285350996eebd52b5ec22e:-1963896052,5dd08b1627285350294af5fcb826fc85:-208917622,32c00b168028535057c504f5d801a6c0:601665801,35500bd2342853500692543845b8ec54:-166827049,b8fffa52b52853504fc583a83343019b:-871200109,37cc72da56e453501453e1949e3c3ab9:1714609515</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_a7cc72da64e4535084c4ab4442e17752</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><applies_to/><condition/><controlled_by_refs/><decision_type>allow</decision_type><description/><local_or_existing>Existing</local_or_existing><name>batch_app_update</name><operation display_value="read">read</operation><script/><security_attribute/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:26:04</sys_created_on><sys_id>a7cc72da64e4535084c4ab4442e17752</sys_id><sys_mod_count>0</sys_mod_count><sys_name>batch_app_update</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_security_acl_a7cc72da64e4535084c4ab4442e17752</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:26:04</sys_updated_on><type display_value="ui_page">ui_page</type></sys_security_acl></record_update>]]></payload>
+<payload_hash>1507160668</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-17 16:38:08</sys_created_on>
+<sys_id>d9ffdb6e83a4df10bbfaf1d6feaad35a</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1ea5d65970000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<table>batch_app_update</table>
+<target_name>batch_app_update</target_name>
+<type>Access Control</type>
+<update_domain>global</update_domain>
+<update_guid>f76f9beabca4df1054a95e704245fd2f</update_guid>
+<update_guid_history>f76f9beabca4df1054a95e704245fd2f:1507160668,37cc72daa9e453506a005841aec205a4:1507160668</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
