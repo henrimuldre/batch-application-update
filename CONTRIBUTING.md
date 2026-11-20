@@ -15,7 +15,7 @@ Never include instance names, user names, credentials, customer data or other se
 You need a ServiceNow instance where you can install store application updates, for example a Personal Developer Instance (PDI). Do not develop against a production instance.
 To get your own PDI, go to [ServiceNow Developers](https://developer.servicenow.com/dev.do) page, login or create an account for free and request a new instance.
 
-1. Import `update-set/Batch_Application_Update_v1.0.xml` and commit it.
+1. Import the update set from `update-set/` and commit it.
 2. Create a new local update set for your change and make it current.
 3. Make your changes in the instance:
    - UI page `batch_app_update` (HTML and client script)

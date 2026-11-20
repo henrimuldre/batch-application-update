@@ -15,7 +15,7 @@
 
 ## Checklist
 
-- [ ] `src/` and `update-set/Batch_Application_Update_v1.0.xml` contain the same code
+- [ ] `src/` and the update set in `update-set/` contain the same code
 - [ ] The exported update set is cleaned (no instance user names, host names or unrelated records such as `sys_user_role`)
 - [ ] New or changed texts are in `BAU_MSG` and the translation scripts in `translations/` are updated
 - [ ] No `[BAU] message key not in BAU_MSG` warnings in the browser console
