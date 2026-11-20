@@ -65,6 +65,7 @@ var BAU_MSG = [
     'Records per page',
     'Payload',
     'Copy JSON',
+    'Details',
     'Confirm batch update',
     'The update runs on the server and cannot be stopped from this page.',
     'Cancel',
@@ -131,6 +132,8 @@ var BAU_MSG = [
     'Status check failed ({0}/{1}): {2}. Retrying in {3} s.',
     'Finished, last check {0}',
     'Batch finished: {0}.',
+    'Open',
+    'Open in Application Manager',
     //help dialog
     'How to use this page?',
     'close',
@@ -263,6 +266,22 @@ function bauSetLink(id, href, text) {
     } else {
         el.textContent = text || '-';
     }
+}
+
+//Link to the application's target version in Application Manager (Next Experience route)
+function bauAppManagerLink(app) {
+    var a = document.createElement('a');
+    a.href = '/now/app-manager/home/app/id/' + encodeURIComponent(app.id) + '/v/' + encodeURIComponent(app.targetVersion);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'bau-ext-link';
+    a.textContent = bauT('Open') + ' \u2197';
+    a.title = bauT('Open in Application Manager');
+    //Opening the link must not toggle the row selection
+    a.onclick = function (e) {
+        e.stopPropagation();
+    };
+    return a;
 }
 
 function bauSelectedCount() {
@@ -479,7 +498,11 @@ function bauRenderRows() {
         tdCheck.appendChild(cb);
         tr.appendChild(tdCheck);
 
-        tr.appendChild(bauCell(app.name, 'bau-col-name'));
+        var tdName = bauCell(app.name, 'bau-col-name');
+        if (app.demoDataLoaded) {
+            tdName.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
+        }
+        tr.appendChild(tdName);
         tr.appendChild(bauCell(app.scope, 'bau-mono bau-muted'));
 
         var tdVer = document.createElement('td');
@@ -489,11 +512,9 @@ function bauRenderRows() {
         tdVer.appendChild(bauSpan(app.targetVersion, 'bau-target'));
         tr.appendChild(tdVer);
 
-        var tdDemo = document.createElement('td');
-        if (app.demoDataLoaded) {
-            tdDemo.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
-        }
-        tr.appendChild(tdDemo);
+        var tdLink = document.createElement('td');
+        tdLink.appendChild(bauAppManagerLink(app));
+        tr.appendChild(tdLink);
 
         tr.onclick = function () {
             if (BAU.busy) {

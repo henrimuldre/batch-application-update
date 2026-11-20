@@ -6,7 +6,7 @@
  * Existing messages are reported (same or different text) and never overwritten.
  */
 (function () {
-    var DRY_RUN = true; //set to false to create the records
+    var READ_ONLY = true; //set to false to create the records
     var LANGUAGE = 'xx'; //language code as in sys_language.id, for example 'de'
     var USE_WORKFLOW = true; //true: records are captured in your current update set
     var LOG_PREFIX = 'BatchAppUpdateTranslations: ';
@@ -41,6 +41,7 @@
         ['Records per page', ''],
         ['Payload', ''],
         ['Copy JSON', ''],
+        ['Details', ''],
         ['Confirm batch update', ''],
         ['The update runs on the server and cannot be stopped from this page.', ''],
         ['Cancel', ''],
@@ -106,6 +107,8 @@
         ['Status check failed ({0}/{1}): {2}. Retrying in {3} s.', ''],
         ['Finished, last check {0}', ''],
         ['Batch finished: {0}.', ''],
+        ['Open', ''],
+        ['Open in Application Manager', ''],
         ['How to use this page?', ''],
         ['close', ''],
         ['What this page does', ''],
@@ -126,7 +129,7 @@
     ];
 
     var out = [];
-    out.push('DRY_RUN=' + DRY_RUN + ' | language=' + LANGUAGE + ' | USE_WORKFLOW=' + USE_WORKFLOW + ' | entries=' + MESSAGES.length);
+    out.push('READ_ONLY=' + READ_ONLY + ' | language=' + LANGUAGE + ' | USE_WORKFLOW=' + USE_WORKFLOW + ' | entries=' + MESSAGES.length);
 
     //Stop if the language is not installed and active
     var grLang = new GlideRecord('sys_language');
@@ -191,7 +194,7 @@
             continue;
         }
 
-        if (DRY_RUN) {
+        if (READ_ONLY) {
             counts.wouldCreate++;
             out.push('WOULD CREATE: ' + key);
             continue;

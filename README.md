@@ -10,6 +10,8 @@ The request runs as the logged-in user, the same way REST API Explorer does. No 
 
 - Lists installed store applications that have an update compatible with the instance's family release, with installed and target version
 - Picks the highest compatible version per application (numeric version comparison)
+- Details link per application that opens its target version in Application Manager in a new tab
+- Demo data badge next to applications that already have demo data loaded
 - Pagination (10, 50 or 100 per page) and selection of up to 100 applications per batch
 - Payload preview with copy to clipboard, so you can review the JSON before anything is sent
 - Confirmation dialog that shows the target instance and the list of applications
@@ -18,6 +20,7 @@ The request runs as the logged-in user, the same way REST API Explorer does. No 
 - Resumes tracking after a page reload and blocks a second batch while one is running, including batches started by other admins from this page
 - Marks a batch as stalled after 60 minutes without progress
 - Shows the installed patch level and warns when an upgrade is assigned but not finished
+- Module under **System Definition**
 - Built-in help dialog
 - All texts are translatable through the Messages table (`sys_ui_message`). English is built in.
 
@@ -29,11 +32,13 @@ The request runs as the logged-in user, the same way REST API Explorer does. No 
 
 ## Installation
 
-1. Download `update-set/Batch_Application_Update_v1.0.xml`.
+1. Download `update-set/Batch_Application_Update_v1.1.xml`.
 2. In your instance, go to **System Update Sets > Retrieved Update Sets** and use **Import Update Set from XML**.
 3. Open the imported update set, click **Preview Update Set** and check that there are no problems.
 4. Click **Commit Update Set**.
-5. Open `/batch_app_update.do` directly or using Next Experience UI `/now/nav/ui/classic/params/target/batch_app_update.do`.
+5. Open **System Definition > Batch Application Update** (or direct URL `/batch_app_update.do` or using Next Experience UI `/now/nav/ui/classic/params/target/batch_app_update.do`, if you prefer).
+
+The v1.1 update set is complete and does not require v1.0. If v1.0 is installed, commit v1.1 over it.
 
 Test it on a sub-production instance first.
 
@@ -46,17 +51,19 @@ Test it on a sub-production instance first.
 | Access Control | `batch_app_update` (type `ui_page`, role admin) |
 | Access Control | `BatchAppUpdateAjax` (type `client_callable_script_include`, role admin) |
 | Access Roles | The two ACL-to-role links for the existing `admin` role |
+| Module | `Batch Application Update` in the System Definition menu (role admin) |
 
-All records are in the Global scope. The update set contains no translations and changes no existing platform records.
+All records are in the Global scope. The update set contains no translations and changes no existing platform records. The module is added to the existing System Definition menu without changing the menu record.
 
 ## Usage
 
-1. Open `/batch_app_update.do` directly or using Next Experience UI `/now/nav/ui/classic/params/target/batch_app_update.do`. The list shows every installed store application with a compatible update.
-2. Select the applications to update. The header checkbox selects or clears the current page.
-3. Check **Load demo data** only if you want demo data loaded for all applications in the batch, for example on a test or demo instance.
-4. Click **Build payload** and review the JSON.
-5. Click **Update selected**, check the instance name and the list in the confirmation dialog, then confirm.
-6. Follow the progress in the Batch install card. When the batch finishes, the list refreshes.
+1. Open **System Definition > Batch Application Update**. You can also open `/batch_app_update.do` directly or using Next Experience UI `/now/nav/ui/classic/params/target/batch_app_update.do`. The list shows every installed store application with a compatible update.
+2. To check what an update contains, click **Open ↗** in the Details column. Application Manager opens the target version in a new tab.
+3. Select the applications to update. The header checkbox selects or clears the current page.
+4. Check **Load demo data** only if you want demo data loaded for all applications in the batch, for example on a test, demo or PDI instance.
+5. Click **Build payload** and review the JSON.
+6. Click **Update selected**, check the instance name and the list in the confirmation dialog, then confirm.
+7. Follow the progress in the Batch install card. When the batch finishes, the list refreshes.
 
 You can reload or close the page while a batch runs. The install continues on the server and the page picks up the running batch when you open it again.
 
@@ -77,9 +84,11 @@ Each script is a background script that:
 - stops if the language is not installed and active on the instance
 - creates only the messages that are missing
 - never overwrites an existing message, and reports keys that already exist with a different text
-- runs as a dry run until you set `DRY_RUN = false`
+- runs read-only until you set `READ_ONLY = false`
 
-To apply one, open **System Definition > Scripts - Background**, paste the script and run it. Review the output, then set `DRY_RUN = false` and run it again.
+To apply one, open **System Definition > Scripts - Background**, paste the script and run it. Review the output, then set `READ_ONLY = false` and run it again.
+
+If you ran a translation script for v1.0, run the v1.1 version as well. It creates only the messages added in v1.1.
 
 ### Adding a language
 
@@ -110,6 +119,7 @@ These values are set in code:
 ## How it works
 
 - **Candidates:** `sys_store_app` records that are installed, visible and have `update_available=true`. For each one, the highest version in `sys_app_version` whose `compatibilities` contains the instance's `glide.buildname` is used as the target.
+- **Details link:** `/now/app-manager/home/app/id/<sys_store_app sys_id>/v/<target version>`.
 - **Install:** the browser posts the payload to `POST /api/sn_cicd/app/batch/install` with the session token (`X-UserToken: g_ck`), so the call runs as the logged-in user.
 - **Tracking:** the page polls `sys_execution_tracker`, `sys_batch_install_plan` and `sys_batch_install_item` through GlideAjax. Polling backs off when nothing changes and pauses while the browser tab is in the background.
 - **Translations:** the page sends its list of message keys to the Script Include, which returns `gs.getMessage()` for each key in the user's session language.
@@ -121,12 +131,13 @@ More information about the CI/CD API: [ServiceNow Docs](https://www.servicenow.c
 - Only store applications are listed. Application customizations are not.
 - Compatibility is matched on the family release (`glide.buildname`). The patch level is shown for information only.
 - With **Load demo data** unchecked, the batch sends `load_demo_data: false` for every application. Test on a sub-production instance how this behaves for applications that already have demo data.
+- The Details link opens Application Manager (`/now/app-manager/...`). Legacy Application Manager is deprecated as of Zurich patch 8 and Australia patch 1, so Application Manager opens in the Next Experience shell even when Next Experience is turned off.
 - A batch cannot be stopped from this page. Use the rollback context in the Batch install card if you need to roll back.
 - The UI page must have **Direct** unchecked. The page relies on `g_ck`, `GlideAjax` and `addLoadEvent` from the standard page template.
 
 ## Uninstall
 
-Delete the UI page `batch_app_update`, the Script Include `BatchAppUpdateAjax` and the two ACLs. If you ran a translation script, delete its `sys_ui_message` records as well.
+Delete the UI page `batch_app_update`, the Script Include `BatchAppUpdateAjax`, the two ACLs and the module **System Definition > Batch Application Update**. If you ran a translation script, delete its `sys_ui_message` records as well.
 
 ## Disclaimer
 

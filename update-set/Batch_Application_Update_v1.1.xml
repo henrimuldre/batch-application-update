@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2026-11-17 16:38:08">
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2026-11-20 11:08:53">
 <sys_remote_update_set action="INSERT_OR_UPDATE">
 <application display_value="Global">global</application>
 <application_name>Global</application_name>
@@ -7,9 +7,16 @@
 <collisions/>
 <commit_date/>
 <deleted/>
-<description>Batch Application Update v1.0
+<description>Batch Application Update v1.1
 
-UI page for admins that lists installed store applications with an update compatible with the instance family release, lets you select up to 100 of them and updates them in one batch through the CI/CD API (POST /api/sn_cicd/app/batch/install), run as the logged-in user.
+UI page for admins that lists installed store applications with an update compatible with the instance family release, lets you select up to 100 of them (limit customizable) and updates them in one batch through the CI/CD API (POST /api/sn_cicd/app/batch/install), run as the logged-in user.
+
+This is a complete update set. It does not require v1.0. If v1.0 is installed, committing v1.1 updates the existing records.
+
+Changes in v1.1:
+- Details column with an "Open" link to the application's target version in Application Manager
+- Demo data badge shown next to the application name
+- Module System Definition &gt; Batch Application Update (order 890)
 
 Contents:
 - UI Page: batch_app_update
@@ -17,6 +24,7 @@ Contents:
 - ACL batch_app_update (type ui_page, role admin)
 - ACL BatchAppUpdateAjax (type client_callable_script_include, role admin)
 - 2 ACL role links to the admin role
+- Module: Batch Application Update (System Definition menu, role admin)
 
 All records are in the Global scope. No translations are included and no existing platform records are changed.
 
@@ -25,28 +33,28 @@ Requirements:
 - Access to the CI/CD API for the user running the page
 
 After commit:
-1. Open /batch_app_update.do directly or using Next Experience UI /now/nav/ui/classic/params/target/batch_app_update.do
+1. Open System Definition &gt; Batch Application Update
 2. Check that the build label and the application list load without an error in the status line
 3. Open "How to use this page?" for usage notes
 
-Translations and documentation: see the project README.</description>
+Translations and documentation: see the Github repo README (https://github.com/henrimuldre/batch-application-update)</description>
 <inserted/>
-<name>Batch_Application_Update_v1.0</name>
+<name>Batch_Application_Update_v1.1</name>
 <origin_sys_id/>
 <parent display_value=""/>
 <release_date/>
 <remote_base_update_set display_value=""/>
 <remote_parent_id/>
-<remote_sys_id>596d172a83a4df10bbfaf1d6feaad365</remote_sys_id>
+<remote_sys_id>f5d7952783e89750bbfaf1d6feaad3f6</remote_sys_id>
 <state>loaded</state>
 <summary/>
 <sys_class_name>sys_remote_update_set</sys_class_name>
 <sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>1dffdb6e83a4df10bbfaf1d6feaad359</sys_id>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>8351f12b83ec9750bbfaf1d6feaad3b8</sys_id>
 <sys_mod_count>0</sys_mod_count>
 <sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
 <update_set display_value=""/>
 <update_source display_value=""/>
 <updated/>
@@ -59,21 +67,47 @@ Translations and documentation: see the project README.</description>
 <name>sys_security_acl_role_aff9be1664e4535084c4ab4442e17732</name>
 <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:13:47</sys_created_on><sys_id>aff9be1664e4535084c4ab4442e17732</sys_id><sys_mod_count>0</sys_mod_count><sys_name>BatchAppUpdateAjax.admin</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_security_acl display_value="BatchAppUpdateAjax">67f97e1664e4535084c4ab4442e17779</sys_security_acl><sys_update_name>sys_security_acl_role_aff9be1664e4535084c4ab4442e17732</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:13:47</sys_updated_on><sys_user_role display_value="admin" name="admin">2831a114c611228501d4ea6c309d626d</sys_user_role></sys_security_acl_role></record_update>]]></payload>
 <payload_hash>2054077210</payload_hash>
-<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>11ffdb6e83a4df10bbfaf1d6feaad35b</sys_id>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>0f51f12b83ec9750bbfaf1d6feaad3ba</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1a1ea5d11b60000001</sys_recorded_at>
+<sys_recorded_at>1a1f88ce8b80000001</sys_recorded_at>
 <sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
 <table>BatchAppUpdateAjax</table>
 <target_name>BatchAppUpdateAjax.admin</target_name>
 <type>Access Roles</type>
 <update_domain>global</update_domain>
-<update_guid>a65fd72ebda4df10b12dbe3729b9acad</update_guid>
-<update_guid_history>a65fd72ebda4df10b12dbe3729b9acad:2054077210,b3f9be1625e45350a90b877ee652285d:2054077210</update_guid_history>
+<update_guid>c05b656f216c9750ffb0b7b5fd6c0fd2</update_guid>
+<update_guid_history>c05b656f216c9750ffb0b7b5fd6c0fd2:2054077210,a65fd72ebda4df10b12dbe3729b9acad:2054077210,3d68c87280e013501b181291e30d6e25:-1623650058,b3f9be1625e45350a90b877ee652285d:2054077210</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_security_acl_role_bfcc72da64e4535084c4ab4442e177a6</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:26:05</sys_created_on><sys_id>bfcc72da64e4535084c4ab4442e177a6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>batch_app_update.admin</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_security_acl display_value="batch_app_update">a7cc72da64e4535084c4ab4442e17752</sys_security_acl><sys_update_name>sys_security_acl_role_bfcc72da64e4535084c4ab4442e177a6</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:26:05</sys_updated_on><sys_user_role display_value="admin" name="admin">2831a114c611228501d4ea6c309d626d</sys_user_role></sys_security_acl_role></record_update>]]></payload>
+<payload_hash>-1830705672</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>4351f12b83ec9750bbfaf1d6feaad3bb</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1f88d7b110000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
+<table>batch_app_update</table>
+<target_name>batch_app_update.admin</target_name>
+<type>Access Roles</type>
+<update_domain>global</update_domain>
+<update_guid>d17ba96ff26c97506346f4afdec2da3a</update_guid>
+<update_guid_history>d17ba96ff26c97506346f4afdec2da3a:-1830705672,047f9b2e6aa4df10313351cb12456164:-1830705672,058840b2f2e0135028e556e17b0c3b12:-2054240432,73cc72dacce453509243be1d8725e1b5:-1830705672</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -347,47 +381,21 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
     type: 'BatchAppUpdateAjax'
 });]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:13:43&lt;/sys_created_on&gt;&lt;sys_id&gt;58697ad264e4535084c4ab4442e177ab&lt;/sys_id&gt;&lt;sys_mod_count&gt;14&lt;/sys_mod_count&gt;&lt;sys_name&gt;BatchAppUpdateAjax&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_58697ad264e4535084c4ab4442e177ab&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-17 13:42:00&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;58697ad264e4535084c4ab4442e177ab&lt;/id&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:13:43&lt;/sys_created_on&gt;&lt;sys_id&gt;6af97e1664e4535084c4ab4442e17770&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-16 19:13:43&lt;/sys_updated_on&gt;&lt;table&gt;sys_script_include&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
 <payload_hash>1742323169</payload_hash>
-<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>51ffdb6e83a4df10bbfaf1d6feaad35a</sys_id>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>4f51f12b83ec9750bbfaf1d6feaad3b9</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1a1ea5ce90a0000001</sys_recorded_at>
+<sys_recorded_at>1a1f88ce8310000001</sys_recorded_at>
 <sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
 <table/>
 <target_name>BatchAppUpdateAjax</target_name>
 <type>Script Include</type>
 <update_domain>global</update_domain>
-<update_guid>445f572e84a4df10046107442c6aa795</update_guid>
-<update_guid_history>445f572e84a4df10046107442c6aa795:1742323169,1da7ba2ea3281b504e237a5350f10817:1742323169,3306be2a03281b5092b7ee97062583c5:1358856728,ad356622b8a41b505d56426f0c150014:746667045,562b82aaeaa8d75082914a808ddfbf51:-1366382344,fcc5c2ea20e4d750580c89c3d0e5eeed:-804026584,67c48ee2c8e4d750b46c9af998405615:1468304879,0852ca6a3d64d750a2d36e30b7a6ef24:-1334041242,25a0422ac024d7509173839f58d2905f:2086264286,454042ea1724d750149012d90072fba5:485822577,ce2db96e02a0d750b653e567e43e12be:-1262178915,b80b8f5676a8535046cf67d6cd575863:1144863599,b109cf1e9b685350a4fc74122c227d81:-1852506946,4f7c769aade45350d13b6b799c7959ae:-410320924,0c6afa560ae453505dd6cfc9bb53c5d3:-1658158598,7ff9be16f0e453501d11713c43fe7361:-1472823785</update_guid_history>
-<update_set display_value=""/>
-<view/>
-</sys_update_xml>
-<sys_update_xml action="INSERT_OR_UPDATE">
-<action>INSERT_OR_UPDATE</action>
-<application display_value="Global">global</application>
-<category>customer</category>
-<comments/>
-<name>sys_security_acl_role_bfcc72da64e4535084c4ab4442e177a6</name>
-<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:26:05</sys_created_on><sys_id>bfcc72da64e4535084c4ab4442e177a6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>batch_app_update.admin</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_security_acl display_value="batch_app_update">a7cc72da64e4535084c4ab4442e17752</sys_security_acl><sys_update_name>sys_security_acl_role_bfcc72da64e4535084c4ab4442e177a6</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:26:05</sys_updated_on><sys_user_role display_value="admin" name="admin">2831a114c611228501d4ea6c309d626d</sys_user_role></sys_security_acl_role></record_update>]]></payload>
-<payload_hash>-1830705672</payload_hash>
-<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
-<replace_on_upgrade>false</replace_on_upgrade>
-<sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>55ffdb6e83a4df10bbfaf1d6feaad35b</sys_id>
-<sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1a1ea5d65f10000001</sys_recorded_at>
-<sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
-<table>batch_app_update</table>
-<target_name>batch_app_update.admin</target_name>
-<type>Access Roles</type>
-<update_domain>global</update_domain>
-<update_guid>047f9b2e6aa4df10313351cb12456164</update_guid>
-<update_guid_history>047f9b2e6aa4df10313351cb12456164:-1830705672,73cc72dacce453509243be1d8725e1b5:-1830705672</update_guid_history>
+<update_guid>cc5be16f086c97507534735bb9155496</update_guid>
+<update_guid_history>cc5be16f086c97507534735bb9155496:1742323169,445f572e84a4df10046107442c6aa795:1742323169,2de70432bee0135062f8bf7aea518cea:1314036461,1da7ba2ea3281b504e237a5350f10817:1742323169,3306be2a03281b5092b7ee97062583c5:1358856728,ad356622b8a41b505d56426f0c150014:746667045,562b82aaeaa8d75082914a808ddfbf51:-1366382344,fcc5c2ea20e4d750580c89c3d0e5eeed:-804026584,67c48ee2c8e4d750b46c9af998405615:1468304879,0852ca6a3d64d750a2d36e30b7a6ef24:-1334041242,25a0422ac024d7509173839f58d2905f:2086264286,454042ea1724d750149012d90072fba5:485822577,ce2db96e02a0d750b653e567e43e12be:-1262178915,b80b8f5676a8535046cf67d6cd575863:1144863599,b109cf1e9b685350a4fc74122c227d81:-1852506946,4f7c769aade45350d13b6b799c7959ae:-410320924,0c6afa560ae453505dd6cfc9bb53c5d3:-1658158598,7ff9be16f0e453501d11713c43fe7361:-1472823785</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -399,21 +407,21 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
 <name>sys_security_acl_67f97e1664e4535084c4ab4442e17779</name>
 <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><applies_to/><condition/><controlled_by_refs/><decision_type>allow</decision_type><description/><local_or_existing>Existing</local_or_existing><name>BatchAppUpdateAjax</name><operation display_value="execute">execute</operation><script/><security_attribute/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:13:46</sys_created_on><sys_id>67f97e1664e4535084c4ab4442e17779</sys_id><sys_mod_count>0</sys_mod_count><sys_name>BatchAppUpdateAjax</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_security_acl_67f97e1664e4535084c4ab4442e17779</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:13:46</sys_updated_on><type display_value="client_callable_script_include">client_callable_script_include</type></sys_security_acl></record_update>]]></payload>
 <payload_hash>-249277482</payload_hash>
-<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>95ffdb6e83a4df10bbfaf1d6feaad35a</sys_id>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>8351f12b83ec9750bbfaf1d6feaad3ba</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1a1ea5d11740000001</sys_recorded_at>
+<sys_recorded_at>1a1f88ce8650000001</sys_recorded_at>
 <sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
 <table>BatchAppUpdateAjax</table>
 <target_name>BatchAppUpdateAjax</target_name>
 <type>Access Control</type>
 <update_domain>global</update_domain>
-<update_guid>ea5f972e6fa4df105db2f91ce033ba7b</update_guid>
-<update_guid_history>ea5f972e6fa4df105db2f91ce033ba7b:-249277482,6ff9be161de4535005f3a56391c8742f:-249277482</update_guid_history>
+<update_guid>cc5be16f876c97502bc3b8399b458c9a</update_guid>
+<update_guid_history>cc5be16f876c97502bc3b8399b458c9a:-249277482,ea5f972e6fa4df105db2f91ce033ba7b:-249277482,ce68c872eee01350cfb3f2253f18f737:-721538846,6ff9be161de4535005f3a56391c8742f:-249277482</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -490,6 +498,7 @@ var BAU_MSG = [
     'Records per page',
     'Payload',
     'Copy JSON',
+    'Details',
     'Confirm batch update',
     'The update runs on the server and cannot be stopped from this page.',
     'Cancel',
@@ -556,6 +565,8 @@ var BAU_MSG = [
     'Status check failed ({0}/{1}): {2}. Retrying in {3} s.',
     'Finished, last check {0}',
     'Batch finished: {0}.',
+    'Open',
+    'Open in Application Manager',
     //help dialog
     'How to use this page?',
     'close',
@@ -688,6 +699,22 @@ function bauSetLink(id, href, text) {
     } else {
         el.textContent = text || '-';
     }
+}
+
+//Link to the application's target version in Application Manager (Next Experience route)
+function bauAppManagerLink(app) {
+    var a = document.createElement('a');
+    a.href = '/now/app-manager/home/app/id/' + encodeURIComponent(app.id) + '/v/' + encodeURIComponent(app.targetVersion);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'bau-ext-link';
+    a.textContent = bauT('Open') + ' \u2197';
+    a.title = bauT('Open in Application Manager');
+    //Opening the link must not toggle the row selection
+    a.onclick = function(e) {
+        e.stopPropagation();
+    };
+    return a;
 }
 
 function bauSelectedCount() {
@@ -904,7 +931,11 @@ function bauRenderRows() {
         tdCheck.appendChild(cb);
         tr.appendChild(tdCheck);
 
-        tr.appendChild(bauCell(app.name, 'bau-col-name'));
+        var tdName = bauCell(app.name, 'bau-col-name');
+        if (app.demoDataLoaded) {
+            tdName.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
+        }
+        tr.appendChild(tdName);
         tr.appendChild(bauCell(app.scope, 'bau-mono bau-muted'));
 
         var tdVer = document.createElement('td');
@@ -914,11 +945,9 @@ function bauRenderRows() {
         tdVer.appendChild(bauSpan(app.targetVersion, 'bau-target'));
         tr.appendChild(tdVer);
 
-        var tdDemo = document.createElement('td');
-        if (app.demoDataLoaded) {
-            tdDemo.appendChild(bauSpan(bauT('Demo data'), 'bau-badge'));
-        }
-        tr.appendChild(tdDemo);
+        var tdLink = document.createElement('td');
+        tdLink.appendChild(bauAppManagerLink(app));
+        tr.appendChild(tdLink);
 
         tr.onclick = function() {
             if (BAU.busy) {
@@ -2122,6 +2151,11 @@ addLoadEvent(function() {
             color: #0b5cab;
         }
 
+        .bau-ext-link {
+            color: #0b5cab;
+            white-space: nowrap;
+        }
+
         .bau-strong {
             font-weight: 600;
         }
@@ -2332,7 +2366,7 @@ addLoadEvent(function() {
                             &lt;th data-bau-msg="Application"&gt;Application&lt;/th&gt;
                             &lt;th data-bau-msg="Scope"&gt;Scope&lt;/th&gt;
                             &lt;th data-bau-msg="Available update"&gt;Available update&lt;/th&gt;
-                            &lt;th&gt;&lt;/th&gt;
+                            &lt;th data-bau-msg="Details"&gt;Details&lt;/th&gt;
                         &lt;/tr&gt;
                     &lt;/thead&gt;
                     &lt;tbody id="bauBody"&gt;&lt;/tbody&gt;
@@ -2413,23 +2447,23 @@ addLoadEvent(function() {
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-&lt;/j:jelly&gt;]]&gt;&lt;/html&gt;&lt;name&gt;batch_app_update&lt;/name&gt;&lt;processing_script/&gt;&lt;sys_class_name&gt;sys_ui_page&lt;/sys_class_name&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:26:03&lt;/sys_created_on&gt;&lt;sys_id&gt;b9973ede64a4535084c4ab4442e1773f&lt;/sys_id&gt;&lt;sys_mod_count&gt;27&lt;/sys_mod_count&gt;&lt;sys_name&gt;batch_app_update&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_page_b9973ede64a4535084c4ab4442e1773f&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-17 16:34:53&lt;/sys_updated_on&gt;&lt;/sys_ui_page&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;b9973ede64a4535084c4ab4442e1773f&lt;/id&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:26:03&lt;/sys_created_on&gt;&lt;sys_id&gt;1bcc72da64e4535084c4ab4442e17747&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-16 19:26:03&lt;/sys_updated_on&gt;&lt;table&gt;sys_ui_page&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
-<payload_hash>2113889760</payload_hash>
-<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+&lt;/j:jelly&gt;]]&gt;&lt;/html&gt;&lt;name&gt;batch_app_update&lt;/name&gt;&lt;processing_script/&gt;&lt;sys_class_name&gt;sys_ui_page&lt;/sys_class_name&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:26:03&lt;/sys_created_on&gt;&lt;sys_id&gt;b9973ede64a4535084c4ab4442e1773f&lt;/sys_id&gt;&lt;sys_mod_count&gt;28&lt;/sys_mod_count&gt;&lt;sys_name&gt;batch_app_update&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_page_b9973ede64a4535084c4ab4442e1773f&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-20 10:25:09&lt;/sys_updated_on&gt;&lt;/sys_ui_page&gt;&lt;sys_es_latest_script action="INSERT_OR_UPDATE"&gt;&lt;id&gt;b9973ede64a4535084c4ab4442e1773f&lt;/id&gt;&lt;sys_created_by&gt;henrimuldre&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-11-16 19:26:03&lt;/sys_created_on&gt;&lt;sys_id&gt;1bcc72da64e4535084c4ab4442e17747&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_updated_by&gt;henrimuldre&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-11-16 19:26:03&lt;/sys_updated_on&gt;&lt;table&gt;sys_ui_page&lt;/table&gt;&lt;use_es_latest&gt;true&lt;/use_es_latest&gt;&lt;/sys_es_latest_script&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1355201196</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>99ffdb6e83a4df10bbfaf1d6feaad35b</sys_id>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>8751f12b83ec9750bbfaf1d6feaad3bb</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1a1ea5d47b00000001</sys_recorded_at>
+<sys_recorded_at>1a1f87d179e0000001</sys_recorded_at>
 <sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
 <table/>
 <target_name>batch_app_update</target_name>
 <type>UI Page</type>
 <update_domain>global</update_domain>
-<update_guid>426fd72eeba4df100950f0735a869eef</update_guid>
-<update_guid_history>426fd72eeba4df100950f0735a869eef:2113889760,b93f932ef1a4df10fbc97c379e71f006:2113889760,27fe9beaf6a4df1096dda7f20f848010:-156304896,358d83eae4289f101322c10d302f5495:-1749707980,9eb6b6aa8e281b50528ac9bbfcccd587:-1888957938,267476660b281b50d96991b6dfc7830e:732478640,c4727622d7281b507bf987b2d434b5d0:-1975539168,a77c6e626ce41b503dbb0feec1e26fee:619016881,d92be6ae2da41b50504daf3e7d759fb8:2084507153,6759ee6a60a41b50f030ef4270fad728:1269301919,782f8222fd6cd7503f1a8530c5497413:-987161081,f94cca26f2e8d750e75dbcb7ab3e6a59:-1333605854,4d1742a6fc28d7507e0462fa1b1837e3:-500700049,0482ce6e8464d75053bd5222dd3c745d:1699767436,5c6ffda21324d75084ffd2e710ceb4f0:1045568718,ef6b5f96f5e0935049982755d794d519:76880302,a4ec839280e85350ecf415e74e1b9e90:-1378582854,692b879686a853501ec4b09b7bd7e28d:-103821441,7a64075e00285350c69d0885f43dab13:-1475997185,4d9307da63285350f9508c563edb03f0:325578368,8c434b9a5a285350af65b2b91bdff525:918705613,6b02cfd64f285350574c17cb7bb8d057:-301396401,5b314b565928535059b1d2ae63c9988a:576092814,92218756cf285350996eebd52b5ec22e:-1963896052,5dd08b1627285350294af5fcb826fc85:-208917622,32c00b168028535057c504f5d801a6c0:601665801,35500bd2342853500692543845b8ec54:-166827049,b8fffa52b52853504fc583a83343019b:-871200109,37cc72da56e453501453e1949e3c3ab9:1714609515</update_guid_history>
+<update_guid>4b57a9e38a6c9750bc6713e37dd0e1e2</update_guid>
+<update_guid_history>4b57a9e38a6c9750bc6713e37dd0e1e2:1355201196,426fd72eeba4df100950f0735a869eef:2113889760,92d7c03203e01350eb87cc346a43f600:-2071553708,b93f932ef1a4df10fbc97c379e71f006:2113889760,27fe9beaf6a4df1096dda7f20f848010:-156304896,358d83eae4289f101322c10d302f5495:-1749707980,9eb6b6aa8e281b50528ac9bbfcccd587:-1888957938,267476660b281b50d96991b6dfc7830e:732478640,c4727622d7281b507bf987b2d434b5d0:-1975539168,a77c6e626ce41b503dbb0feec1e26fee:619016881,d92be6ae2da41b50504daf3e7d759fb8:2084507153,6759ee6a60a41b50f030ef4270fad728:1269301919,782f8222fd6cd7503f1a8530c5497413:-987161081,f94cca26f2e8d750e75dbcb7ab3e6a59:-1333605854,4d1742a6fc28d7507e0462fa1b1837e3:-500700049,0482ce6e8464d75053bd5222dd3c745d:1699767436,5c6ffda21324d75084ffd2e710ceb4f0:1045568718,ef6b5f96f5e0935049982755d794d519:76880302,a4ec839280e85350ecf415e74e1b9e90:-1378582854,692b879686a853501ec4b09b7bd7e28d:-103821441,7a64075e00285350c69d0885f43dab13:-1475997185,4d9307da63285350f9508c563edb03f0:325578368,8c434b9a5a285350af65b2b91bdff525:918705613,6b02cfd64f285350574c17cb7bb8d057:-301396401,5b314b565928535059b1d2ae63c9988a:576092814,92218756cf285350996eebd52b5ec22e:-1963896052,5dd08b1627285350294af5fcb826fc85:-208917622,32c00b168028535057c504f5d801a6c0:601665801,35500bd2342853500692543845b8ec54:-166827049,b8fffa52b52853504fc583a83343019b:-871200109,37cc72da56e453501453e1949e3c3ab9:1714609515</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -2441,21 +2475,47 @@ addLoadEvent(function() {
 <name>sys_security_acl_a7cc72da64e4535084c4ab4442e17752</name>
 <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><applies_to/><condition/><controlled_by_refs/><decision_type>allow</decision_type><description/><local_or_existing>Existing</local_or_existing><name>batch_app_update</name><operation display_value="read">read</operation><script/><security_attribute/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-16 19:26:04</sys_created_on><sys_id>a7cc72da64e4535084c4ab4442e17752</sys_id><sys_mod_count>0</sys_mod_count><sys_name>batch_app_update</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_security_acl_a7cc72da64e4535084c4ab4442e17752</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-16 19:26:04</sys_updated_on><type display_value="ui_page">ui_page</type></sys_security_acl></record_update>]]></payload>
 <payload_hash>1507160668</payload_hash>
-<remote_update_set display_value="Batch_Application_Update_v1.0">1dffdb6e83a4df10bbfaf1d6feaad359</remote_update_set>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>henrimuldre</sys_created_by>
-<sys_created_on>2026-11-17 16:38:08</sys_created_on>
-<sys_id>d9ffdb6e83a4df10bbfaf1d6feaad35a</sys_id>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>c751f12b83ec9750bbfaf1d6feaad3ba</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1a1ea5d65970000001</sys_recorded_at>
+<sys_recorded_at>1a1f88d7a800000001</sys_recorded_at>
 <sys_updated_by>henrimuldre</sys_updated_by>
-<sys_updated_on>2026-11-17 16:38:08</sys_updated_on>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
 <table>batch_app_update</table>
 <target_name>batch_app_update</target_name>
 <type>Access Control</type>
 <update_domain>global</update_domain>
-<update_guid>f76f9beabca4df1054a95e704245fd2f</update_guid>
-<update_guid_history>f76f9beabca4df1054a95e704245fd2f:1507160668,37cc72daa9e453506a005841aec205a4:1507160668</update_guid_history>
+<update_guid>957be16fb86c97503c7497d494b62359</update_guid>
+<update_guid_history>957be16fb86c97503c7497d494b62359:1507160668,f76f9beabca4df1054a95e704245fd2f:1507160668,0d8840b231e01350fdd3d15d1e2b9b1a:-1295654040,37cc72daa9e453506a005841aec205a4:1507160668</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_app_module_01ce15a3832c9750bbfaf1d6feaad3ab</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="System Definition">c7fd1762c0a80166015926d15731965d</application><assessment/><device_type/><filter/><hint/><homepage/><image/><karuna_route/><link_type>DIRECT</link_type><map_page/><mobile_title>Batch Application Update</mobile_title><mobile_view_name>Mobile</mobile_view_name><name/><order>890</order><override_menu_roles>false</override_menu_roles><query>batch_app_update.do</query><report/><require_confirmation>true</require_confirmation><roles>admin</roles><route/><screen/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>henrimuldre</sys_created_by><sys_created_on>2026-11-20 09:49:43</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>01ce15a3832c9750bbfaf1d6feaad3ab</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Batch Application Update</sys_name><sys_overrides/><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_app_module_01ce15a3832c9750bbfaf1d6feaad3ab</sys_update_name><sys_updated_by>henrimuldre</sys_updated_by><sys_updated_on>2026-11-20 09:50:15</sys_updated_on><timeline_page/><title>Batch Application Update</title><uncancelable>false</uncancelable><ux_list/><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+<payload_hash>-1977255035</payload_hash>
+<remote_update_set display_value="Batch_Application_Update_v1.1">8351f12b83ec9750bbfaf1d6feaad3b8</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>henrimuldre</sys_created_by>
+<sys_created_on>2026-11-20 11:08:51</sys_created_on>
+<sys_id>cb51f12b83ec9750bbfaf1d6feaad3b8</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a1f85d21c40000001</sys_recorded_at>
+<sys_updated_by>henrimuldre</sys_updated_by>
+<sys_updated_on>2026-11-20 11:08:51</sys_updated_on>
+<table/>
+<target_name>Batch Application Update</target_name>
+<type>Module</type>
+<update_domain>global</update_domain>
+<update_guid>ef5fd5e3f92c9750f57ef1000a948297</update_guid>
+<update_guid_history>ef5fd5e3f92c9750f57ef1000a948297:-1977255035,8c4fd1e3582c97506422caf8c78a2528:1611119562</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
