@@ -26,18 +26,18 @@ To get your own PDI, go to [ServiceNow Developers](https://developer.servicenow.
 - **Keep `src/` and the update set in sync.** Copy your final code into the matching files in `src/` and export a new update set XML that contains the same code.
 - **Global scope, ES5.** The client script and the Script Include must run without a build step. Do not use `let`, `const`, arrow functions or other syntax the ServiceNow script engine or older browsers may reject.
 - **Texts go through `bauT()`.** Every user-facing text must be an English key in `BAU_MSG` in the client script. Static texts in the HTML use `data-bau-msg="<key>"`. If you add, change or remove a key, update all translation scripts in `translations/` as well.
-- **Keep the admin checks.** Every client-callable method in `BatchAppUpdateAjax` must keep its role check.
+- **Keep the role checks.** Every client-callable method in `BatchAppUpdateAjax` except `getMessages` must call `_hasAccess()`. Use `REQUIRE_ROLE` instead of a hard-coded role name.
 - **No instance-specific values.** No hard-coded `sys_id` values, host names, user names or customer-specific logic.
 
 ## Cleaning an exported update set
 
 Before you commit an exported XML, check it for data from your instance:
 
-- `sys_created_by` and `sys_updated_by` values, both in the main XML and inside each `<payload>`
+- `sys_created_by` and `sys_updated_by` values, both in the main XML and inside each `<payload>`. The payloads of the UI page and the Script Include also contain a `sys_es_latest_script` block after the main record. Check it too.
 - instance names, host names and URLs
-- records that do not belong to the tool. "Add to Update Set" utilities can add dependencies such as the `admin` role record (`sys_user_role`), remove those
+- records that do not belong to the tool. "Add to Update Set" utilities can add dependencies such as the role record (`sys_user_role`) of the required role, remove those
 
-The update set must contain only the UI page, the Script Include, the two ACLs and their two role links.
+The update set must contain only the UI page, the Script Include, the two ACLs, their two role links and the module.
 
 ## Translations
 

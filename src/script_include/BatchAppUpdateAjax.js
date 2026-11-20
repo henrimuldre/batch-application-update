@@ -3,11 +3,12 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
 
     BATCH_PREFIX: 'Batch Applications Update',
     STALE_MINUTES: 60,
+    REQUIRE_ROLE: 'admin',
 
     /* ---------- client callable ---------- */
 
     getCandidates: function () {
-        if (!gs.hasRole('admin')) {
+        if (!this._hasAccess()) {
             return this._accessError();
         }
 
@@ -56,12 +57,13 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
             assignedLabel: upgradePending ? (this._buildDescription(warAssigned) || warAssigned) : null,
             upgradePending: upgradePending,
             staleMinutes: this.STALE_MINUTES,
+            requiredRole: this.REQUIRE_ROLE,
             apps: apps
         });
     },
 
     getActiveBatch: function () {
-        if (!gs.hasRole('admin')) {
+        if (!this._hasAccess()) {
             return this._accessError();
         }
         return JSON.stringify({
@@ -70,7 +72,7 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
     },
 
     getBatchStatus: function () {
-        if (!gs.hasRole('admin')) {
+        if (!this._hasAccess()) {
             return this._accessError();
         }
         var trackerId = String(this.getParameter('sysparm_tracker_id') || '');
@@ -86,7 +88,7 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
     },
 
     getBatchItems: function () {
-        if (!gs.hasRole('admin')) {
+        if (!this._hasAccess()) {
             return this._accessError();
         }
         var planId = String(this.getParameter('sysparm_plan_id') || '');
@@ -210,9 +212,13 @@ BatchAppUpdateAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor
         return userName || '';
     },
 
+    _hasAccess: function () {
+        return gs.hasRole(this.REQUIRE_ROLE);
+    },
+
     _accessError: function () {
         return JSON.stringify({
-            error: gs.getMessage('admin role required')
+            error: gs.getMessage('{0} role required', [this.REQUIRE_ROLE])
         });
     },
 

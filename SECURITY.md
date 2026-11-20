@@ -6,7 +6,8 @@ Only the latest release in this repository receives fixes.
 
 | Version | Supported |
 |---|---|
-| 1.1 | Yes |
+| 1.2 | Yes |
+| 1.1 | No |
 | 1.0 | No |
 
 ## Reporting a vulnerability
@@ -35,9 +36,9 @@ In scope:
 Out of scope:
 
 - the ServiceNow platform itself, including the CI/CD API. Report those to ServiceNow.
-- issues that require the admin role, unless they let a user do more than the admin role already allows
+- issues that require the configured role (`REQUIRE_ROLE`, default `admin`), unless they let a user do more than that role already allows
 
 ## Security design notes
 
-- The page and every client-callable method require the `admin` role.
+- The UI page ACL and every client-callable method except `getMessages` require the role set in `REQUIRE_ROLE` (default `admin`). `getMessages` returns only the translated page texts.
 - The batch install request runs as the logged-in user with the session token (`g_ck`). The tool stores no credentials.

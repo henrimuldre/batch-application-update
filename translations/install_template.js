@@ -124,8 +124,10 @@
         ['A batch without progress for {0} minutes is shown as stalled and no longer blocks Update. Check the execution tracker before starting another batch.', ''],
         ['Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.', ''],
         ['The Rollback link in the Batch install card opens the rollback context of the batch.', ''],
-        ['Requires the admin role and access to the CI/CD API.', ''],
-        ['More information about the CI/CD API from ServiceNow Docs', '']
+        ['Requires the {0} role and access to the CI/CD API.', ''],
+        ['More information about the CI/CD API from ServiceNow Docs', ''],
+        ['{0} role required', ''],
+        ['Execution tracker not found: {0}', '']
     ];
 
     var out = [];

@@ -8,6 +8,7 @@ var BAU = {
     pageSize: 50,
     maxBatch: 100,
     staleMinutes: 60,
+    requiredRole: 'admin',
     batchPrefix: '',
     loadDemoData: false,
     payload: null,
@@ -150,7 +151,7 @@ var BAU_MSG = [
     'A batch without progress for {0} minutes is shown as stalled and no longer blocks Update. Check the execution tracker before starting another batch.',
     'Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.',
     'The Rollback link in the Batch install card opens the rollback context of the batch.',
-    'Requires the admin role and access to the CI/CD API.',
+    'Requires the {0} role and access to the CI/CD API.',
     'More information about the CI/CD API from ServiceNow Docs'
 ];
 
@@ -432,6 +433,9 @@ function bauLoad(doneMsg, doneType) {
         BAU.batchPrefix = res.batchPrefix || '';
         if (res.staleMinutes) {
             BAU.staleMinutes = res.staleMinutes;
+        }
+        if (res.requiredRole) {
+            BAU.requiredRole = res.requiredRole;
         }
         var buildEl = bauEl('bauBuild');
         buildEl.textContent = res.buildLabel || res.buildName || '';
@@ -851,6 +855,7 @@ function bauShowHelp() {
 
     bauEl('bauHelpLimit').textContent = bauT('A batch holds up to {0} applications. Only one batch can run at a time. Update is disabled while another batch is running.', [BAU.maxBatch]);
     bauEl('bauHelpStale').textContent = bauT('A batch without progress for {0} minutes is shown as stalled and no longer blocks Update. Check the execution tracker before starting another batch.', [BAU.staleMinutes]);
+    bauEl('bauHelpRole').textContent = bauT('Requires the {0} role and access to the CI/CD API.', [BAU.requiredRole]);
 
     function onKey(e) {
         if (e.key === 'Escape') {

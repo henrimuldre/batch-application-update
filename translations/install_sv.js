@@ -124,8 +124,10 @@
         ['A batch without progress for {0} minutes is shown as stalled and no longer blocks Update. Check the execution tracker before starting another batch.', 'En batch utan förlopp på {0} minuter visas som avstannad och blockerar inte längre Uppdatera. Kontrollera körningsspåraren innan du startar en ny batch.'],
         ['Demo data is loaded only when Load demo data is checked, for all applications in the batch. Use it on test or demo instances. The Demo data badge shows applications that already have demo data loaded.', 'Demodata läses in endast när Läs in demodata är markerad, för alla applikationer i batchen. Använd det på test- eller demoinstanser. Märket Demodata visar applikationer som redan har demodata inlästa.'],
         ['The Rollback link in the Batch install card opens the rollback context of the batch.', 'Länken Återställ i kortet Batchinstallation öppnar batchens återställningskontext.'],
-        ['Requires the admin role and access to the CI/CD API.', 'Kräver rollen admin och åtkomst till CI/CD-API:t.'],
-        ['More information about the CI/CD API from ServiceNow Docs', 'Mer information om CI/CD-API:t i ServiceNow Docs']
+        ['Requires the {0} role and access to the CI/CD API.', 'Kräver rollen {0} och åtkomst till CI/CD-API:t.'],
+        ['More information about the CI/CD API from ServiceNow Docs', 'Mer information om CI/CD-API:t i ServiceNow Docs'],
+        ['{0} role required', 'Rollen {0} krävs'],
+        ['Execution tracker not found: {0}', 'Körningsspåraren hittades inte: {0}']
     ];
 
     var out = [];
