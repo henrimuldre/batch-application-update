@@ -6,7 +6,8 @@ Only the latest release in this repository receives fixes.
 
 | Version | Supported |
 |---|---|
-| 1.2 | Yes |
+| 1.2.1 | Yes |
+| 1.2 | No |
 | 1.1 | No |
 | 1.0 | No |
 

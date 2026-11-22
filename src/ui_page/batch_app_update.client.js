@@ -1273,7 +1273,7 @@ function bauPoll() {
         BAU.batch = b;
 
         var scope = bauCurrentScope(b.detail);
-        if (b.planId && (BAU.itemsPlanId !== b.planId || scope !== BAU.lastScope)) {
+        if (b.planId && (BAU.itemsPlanId !== b.planId || !BAU.items.length || changed || scope !== BAU.lastScope)) {
             bauLoadItems().then(null, function () { });
         }
         BAU.lastScope = scope;

@@ -2,7 +2,7 @@
  
 A UI page for ServiceNow admins that lists installed store applications with an available update, lets you select up to 100 of them and updates them in one batch through the CI/CD API. Application Manager updates applications one at a time. This page sends them as a single batch install and tracks its progress.
  
-![Batch application update page listing store applications with available updates](docs/screenshots/1_main_page.png)
+![Batch application update page listing store applications with available updates](docs/screenshots/1_main_page.jpeg)
  
 The request runs as the logged-in user, the same way REST API Explorer does. No integration user, credentials or OAuth setup is needed.
  
@@ -31,12 +31,13 @@ The request runs as the logged-in user, the same way REST API Explorer does. No 
 - Tested on the Australia and Brazil family releases, in Core UI and inside Next Experience.
 ## Installation
  
-1. Download `update-set/Batch_Application_Update_v1.2.xml`.
+1. Download `update-set/Batch_Application_Update_v1.2.1.xml`.
 2. In your instance, go to **System Update Sets > Retrieved Update Sets** and use **Import Update Set from XML**.
 3. Open the imported update set, click **Preview Update Set** and check that there are no problems.
 4. Click **Commit Update Set**.
 5. Open **System Definition > Batch Application Update** (or direct URL `/batch_app_update.do` or using Next Experience UI `/now/nav/ui/classic/params/target/batch_app_update.do`, if you prefer).
-The v1.2 update set is complete and does not require an earlier version. If v1.0 or v1.1 is installed, commit v1.2 over it.
+
+The v1.2.1 update set is complete and does not require an earlier version. If v1.0, v1.1 or v1.2 is installed, commit v1.2.1 over it.
  
 Test it on a sub-production instance first.
  
@@ -63,9 +64,9 @@ All records are in the Global scope. The update set contains no translations and
    <details>
    <summary>Screenshots: payload and confirmation with Load demo data</summary>
 
-   ![Payload with load_demo_data set to true](docs/screenshots/2.1_build_payload_demo_data.png)
+   ![Payload with Load demo data checked and load_demo_data set to true](docs/screenshots/2.2_build_payload_demo_data.jpeg)
 
-   ![Confirmation dialog with the demo data notice](docs/screenshots/3.1_confirmation_demo_data.png)
+   ![Confirmation dialog with Demo data badges and the demo data notice](docs/screenshots/3.2_confirmation_demo_data.jpeg)
 
    </details>
 
@@ -74,7 +75,7 @@ All records are in the Global scope. The update set contains no translations and
    <details>
    <summary>Screenshot: payload preview</summary>
 
-   ![Payload preview with the JSON for the selected applications](docs/screenshots/2_build_payload.png)
+   ![Payload preview with the JSON for the selected applications](docs/screenshots/2.1_build_payload.jpeg)
 
    </details>
 
@@ -83,18 +84,20 @@ All records are in the Global scope. The update set contains no translations and
    <details>
    <summary>Screenshot: confirmation dialog</summary>
 
-   ![Confirmation dialog with the instance name and the selected applications](docs/screenshots/3_confirmation.png)
+   ![Confirmation dialog with the instance name and the selected applications](docs/screenshots/3.1_confirmation.jpeg)
 
    </details>
 
-7. Follow the progress in the Batch install card. When the batch finishes, the list refreshes.
+7. Follow the progress in the Batch install card. The Batch items card appears once the platform has created the items and their states update while the batch runs. When the batch finishes, the list refreshes.
 
    <details>
-   <summary>Screenshots: batch in progress and finished</summary>
+   <summary>Screenshots: batch queued, running and finished</summary>
 
-   ![Batch install card while the batch runs](docs/screenshots/4_in_progress.png)
+   ![Batch install card right after submitting, while the queued operation starts](docs/screenshots/4.1_in_progress_queued.jpeg)
 
-   ![Batch install card and batch items after the batch finished](docs/screenshots/5_finished.png)
+   ![Batch install card while the batch runs, with the batch items](docs/screenshots/4.2_in_progress_running.jpeg)
+
+   ![Batch install card and batch items after the batch finished](docs/screenshots/5_finished.jpeg)
 
    </details>
 
